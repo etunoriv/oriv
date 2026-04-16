@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "Can we bring our own internal component libraries?",
-    a: "Yes. Oriv provides a global market knowledge base, but the platform is designed to integrate with your internal libraries and preferred supplier lists. Your institutional knowledge does not get left behind.",
+    a: "Yes. Oriv provides a global market knowledge base, but the platform is designed to integrate with your internal libraries and preferred supplier lists.",
   },
 ];
 
@@ -38,7 +38,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
     <div className={`${index < faqs.length - 1 ? "border-b border-line" : ""}`}>
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left px-0 py-6 group focus-visible:outline-2 focus-visible:outline-accent"
+        className="w-full text-left py-5 group focus-visible:outline-2 focus-visible:outline-accent"
         aria-expanded={open}
       >
         <div className="flex items-start justify-between gap-6">
@@ -48,7 +48,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
           <motion.span
             animate={{ rotate: open ? 45 : 0 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="type-micro text-accent shrink-0 mt-1 text-lg font-bold"
+            className="text-accent shrink-0 mt-1 text-lg font-bold"
           >
             +
           </motion.span>
@@ -63,8 +63,8 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <div className="pb-6">
-              <p className="text-muted leading-relaxed max-w-2xl" style={{ fontSize: "0.9rem" }}>
+            <div className="pb-5">
+              <p className="text-muted leading-relaxed text-base max-w-2xl">
                 {a}
               </p>
             </div>
@@ -77,19 +77,19 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
 
 export default function Faq() {
   return (
-    <section className="py-24 md:py-32 bg-surface/50">
+    <section className="py-16 md:py-24 bg-surface/50">
       <div className="mx-auto max-w-[1400px] px-6">
-        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16">
+        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12">
           <ScrollReveal>
             <div className="lg:sticky lg:top-32">
-              <span className="type-micro text-accent font-bold block mb-6">/// FAQ</span>
+              <span className="type-micro text-accent font-bold block mb-4">/// FAQ</span>
               <h2
                 className="type-macro text-foreground"
-                style={{ fontSize: "clamp(2rem, 4vw, 4rem)" }}
+                style={{ fontSize: "clamp(1.6rem, 3vw, 3rem)" }}
               >
                 STRAIGHT <span className="text-accent">ANSWERS</span>
               </h2>
-              <p className="mt-4 text-muted leading-relaxed" style={{ fontSize: "0.9rem" }}>
+              <p className="mt-3 text-muted leading-relaxed text-base">
                 The questions engineers actually ask during evaluations.
               </p>
             </div>

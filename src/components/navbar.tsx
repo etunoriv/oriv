@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const links = [
   { label: "FEATURES", href: "#features" },
-  { label: "CONTACT", href: "#contact" },
+  { label: "CONTACT", href: "#get-started" },
   { label: "CAREERS", href: "#" },
   { label: "ABOUT", href: "#" },
 ];
@@ -55,10 +55,10 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="#get-started"
             className="ml-2 bg-accent px-5 py-2.5 type-micro text-foreground font-bold tracking-[0.1em] rounded-md btn-press transition-all duration-300 hover:bg-accent/80 hover:shadow-[0_4px_16px_rgba(255,197,46,0.3)]"
           >
-            REQUEST ACCESS
+            REQUEST A PILOT
           </a>
         </div>
 
@@ -91,11 +91,11 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="#get-started"
               onClick={() => setOpen(false)}
               className="block bg-accent px-6 py-4 type-micro text-foreground font-bold"
             >
-              REQUEST ACCESS
+              REQUEST A PILOT
             </a>
           </div>
         </>
