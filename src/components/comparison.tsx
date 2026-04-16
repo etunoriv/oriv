@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import ScrollReveal from "@/components/scroll-reveal";
 
 const rows = [
   {
@@ -32,79 +32,69 @@ const rows = [
 
 export default function Comparison() {
   return (
-    <section className="border-b border-line">
-      {/* Section header */}
-      <div className="border-b border-line px-6 py-4">
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between">
-          <span className="type-micro text-accent font-bold">[ BEFORE / AFTER ]</span>
-          <span className="type-micro">WHAT CHANGES WHEN YOU SWITCH</span>
-        </div>
+    <section className="py-24 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-6">
+        <ScrollReveal>
+          <div className="mb-16">
+            <span className="type-micro text-accent font-bold block mb-6">/// BEFORE / AFTER</span>
+            <h2
+              className="type-macro text-foreground"
+              style={{ fontSize: "clamp(2rem, 5vw, 5.5rem)" }}
+            >
+              THE OLD WAY VS. <span className="text-accent">ORIV</span>
+            </h2>
+            <p className="mt-6 text-muted max-w-xl leading-relaxed" style={{ fontSize: "0.95rem" }}>
+              We are not adding another tool to your stack. We are replacing the
+              manual work that should not exist in the first place.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <div className="bg-white border border-line rounded-lg overflow-hidden">
+            {/* Table header */}
+            <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr_1fr] border-b border-line bg-surface/50">
+              <div className="hidden md:block p-5">
+                <samp className="type-micro text-dim font-bold">DIMENSION</samp>
+              </div>
+              <div className="hidden md:block p-5 border-l border-line">
+                <samp className="type-micro text-muted font-bold">WITHOUT ORIV</samp>
+              </div>
+              <div className="hidden md:block p-5 border-l border-line">
+                <samp className="type-micro text-accent font-bold">WITH ORIV</samp>
+              </div>
+            </div>
+
+            {/* Rows */}
+            {rows.map((row, i) => (
+              <div
+                key={i}
+                className={`grid grid-cols-1 md:grid-cols-[1.2fr_1fr_1fr] transition-colors duration-200 hover:bg-surface/30 ${
+                  i < rows.length - 1 ? "border-b border-line" : ""
+                }`}
+              >
+                <div className="p-5">
+                  <samp className="type-micro text-foreground font-bold text-sm tracking-[0.04em]">
+                    {row.dimension}
+                  </samp>
+                </div>
+                <div className="p-5 md:border-l border-line">
+                  <samp className="type-micro text-muted font-bold md:hidden block mb-2">WITHOUT ORIV</samp>
+                  <p className="text-muted leading-relaxed text-sm">
+                    {row.before}
+                  </p>
+                </div>
+                <div className="p-5 md:border-l border-line">
+                  <samp className="type-micro text-accent font-bold md:hidden block mb-2">WITH ORIV</samp>
+                  <p className="text-foreground leading-relaxed text-sm">
+                    {row.after}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </div>
-
-      {/* Title */}
-      <div className="border-b border-line px-6 py-12">
-        <div className="mx-auto max-w-[1400px]">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="type-macro text-foreground"
-            style={{ fontSize: "clamp(2rem, 6vw, 7rem)" }}
-          >
-            THE OLD WAY
-            <br />
-            VS. <span className="text-accent">ORIV</span>
-          </motion.h2>
-          <p className="mt-6 font-mono text-muted max-w-xl" style={{ fontSize: "0.85rem", letterSpacing: "0.04em" }}>
-            We are not adding another tool to your stack. We are replacing the
-            manual work that should not exist in the first place.
-          </p>
-        </div>
-      </div>
-
-      {/* Comparison table */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4 }}
-        className="mx-auto max-w-[1400px]"
-      >
-        {/* Table header */}
-        <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-line">
-          <div className="p-4 md:p-6">
-            <samp className="type-micro text-dim font-bold">DIMENSION</samp>
-          </div>
-          <div className="p-4 md:p-6 border-l border-line">
-            <samp className="type-micro text-muted font-bold">WITHOUT ORIV</samp>
-          </div>
-          <div className="p-4 md:p-6 border-l border-line">
-            <samp className="type-micro text-accent font-bold">WITH ORIV</samp>
-          </div>
-        </div>
-
-        {/* Rows */}
-        {rows.map((row, i) => (
-          <div key={i} className="grid grid-cols-[1fr_1fr_1fr] border-b border-line">
-            <div className="p-4 md:p-6 flex items-start">
-              <samp className="type-micro text-foreground font-bold text-sm tracking-[0.04em]">
-                {row.dimension}
-              </samp>
-            </div>
-            <div className="p-4 md:p-6 border-l border-line">
-              <p className="font-mono text-muted leading-relaxed text-xs tracking-wide">
-                {row.before}
-              </p>
-            </div>
-            <div className="p-4 md:p-6 border-l border-line">
-              <p className="font-mono text-foreground leading-relaxed text-xs tracking-wide">
-                {row.after}
-              </p>
-            </div>
-          </div>
-        ))}
-      </motion.div>
     </section>
   );
 }

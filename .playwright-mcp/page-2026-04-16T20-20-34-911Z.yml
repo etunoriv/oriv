@@ -1,0 +1,245 @@
+- generic [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - navigation [ref=e4]:
+      - link "/// ORIV STUDIO" [ref=e5] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e6]: ///
+        - text: ORIV STUDIO
+      - generic [ref=e7]:
+        - link "[ FEATURES ]" [ref=e8] [cursor=pointer]:
+          - /url: "#features"
+        - link "[ CONTACT ]" [ref=e9] [cursor=pointer]:
+          - /url: "#contact"
+        - link "[ CAREERS ]" [ref=e10] [cursor=pointer]:
+          - /url: "#"
+        - link "[ ABOUT ]" [ref=e11] [cursor=pointer]:
+          - /url: "#"
+        - link "CONTACT SALES >>>" [ref=e12] [cursor=pointer]:
+          - /url: "#contact"
+  - main [ref=e13]:
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]: ● LIVE
+        - generic [ref=e18]: "SYS.STATUS: ALPHA EDITION"
+        - generic [ref=e19]: REV 0.1.0
+        - generic [ref=e20]: UNIT / STUDIO-01
+      - heading "DESIGN, SIMULATE, INTEGRATE & TEST" [level=1] [ref=e21]:
+        - text: DESIGN,
+        - text: SIMULATE,
+        - text: INTEGRATE
+        - text: "& TEST"
+      - generic [ref=e22]:
+        - paragraph [ref=e23]: Oriv Studio is an AI-native platform that lets you pick perfect components, simulate their behavior, and test them — allowing embedded teams to launch systems 2× as fast.
+        - generic [ref=e24]:
+          - link "CONTACT SALES >>>" [ref=e25] [cursor=pointer]:
+            - /url: "#contact"
+          - link "[ WATCH DEMO ]" [ref=e26] [cursor=pointer]:
+            - /url: "#features"
+      - generic [ref=e27]:
+        - generic [ref=e28]: BUILD 2026.04.17
+        - generic [ref=e29]: "PLATFORM: WEB"
+        - generic [ref=e30]: "CLEARANCE: PUBLIC"
+        - generic [ref=e31]: "STATUS: OPERATIONAL"
+    - generic [ref=e32]:
+      - generic [ref=e34]:
+        - generic [ref=e35]: "[ THE PROBLEM ]"
+        - generic [ref=e36]: DIAGNOSTIC REPORT — 4 CRITICAL FAILURES
+      - generic [ref=e38]:
+        - heading "WHY ENGINEERING SPEED STALLS" [level=2] [ref=e39]:
+          - text: WHY ENGINEERING
+          - text: SPEED STALLS
+        - paragraph [ref=e40]: Oriv simplifies complex workflows and makes design, simulation, and testing intuitive — powered by AI.
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - generic [ref=e43]:
+            - generic [ref=e44]:
+              - generic [ref=e45]: ERR-01
+              - generic [ref=e46]: "STATUS: CRITICAL"
+            - separator [ref=e47]
+            - heading "SELECTION INEFFICIENCY & RISK" [level=3] [ref=e48]
+            - paragraph [ref=e49]: The current manual selection process burns engineering weeks and increases the risk of sourcing obsolete or incompatible components.
+          - button "+ EXPAND DETAILS" [ref=e50]
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - generic [ref=e54]: ERR-02
+              - generic [ref=e55]: "STATUS: CRITICAL"
+            - separator [ref=e56]
+            - heading "UNSUSTAINABLE MODELING COSTS" [level=3] [ref=e57]
+            - paragraph [ref=e58]: The time and specialized labor required to build accurate high-fidelity models from scratch destroys the ROI of simulation.
+          - button "+ EXPAND DETAILS" [ref=e59]
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - generic [ref=e62]:
+              - generic [ref=e63]: ERR-03
+              - generic [ref=e64]: "STATUS: CRITICAL"
+            - separator [ref=e65]
+            - heading "PROTOTYPING DRAINS THE BUDGET" [level=3] [ref=e66]
+            - paragraph [ref=e67]: Physical iteration is expensive. Discovering flaws only after hardware manufacturing leads to missed market windows.
+          - button "+ EXPAND DETAILS" [ref=e68]
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - generic [ref=e72]: ERR-04
+              - generic [ref=e73]: "STATUS: CRITICAL"
+            - separator [ref=e74]
+            - heading "LOW-VALUE TASKS CONSUME TOP TALENT" [level=3] [ref=e75]
+            - paragraph [ref=e76]: Your best engineers are stuck fighting with tool configuration and data parsing rather than innovating on product features.
+          - button "+ EXPAND DETAILS" [ref=e77]
+    - generic [ref=e78]:
+      - generic [ref=e80]:
+        - generic [ref=e81]: "[ THE SOLUTION ]"
+        - generic [ref=e82]: OPERATIONAL MODULES — 4 SUBSYSTEMS
+      - heading "HOW ORIV WORKS FOR YOU" [level=2] [ref=e85]:
+        - text: HOW ORIV
+        - text: WORKS FOR YOU
+      - generic [ref=e86]:
+        - button "MOD-01 COMPONENT SELECTION" [ref=e87]:
+          - generic [ref=e88]: MOD-01
+          - generic [ref=e89]: COMPONENT SELECTION
+        - button "MOD-02 REAL-TIME SIMULATIONS" [active] [ref=e90]:
+          - generic [ref=e91]: MOD-02
+          - generic [ref=e92]: REAL-TIME SIMULATIONS
+        - button "MOD-03 VIRTUAL / PHYSICAL / HYBRID" [ref=e93]:
+          - generic [ref=e94]: MOD-03
+          - generic [ref=e95]: VIRTUAL / PHYSICAL / HYBRID
+        - button "MOD-04 REALTIME INSTRUMENTS" [ref=e96]:
+          - generic [ref=e97]: MOD-04
+          - generic [ref=e98]: REALTIME INSTRUMENTS
+      - generic [ref=e251]:
+        - generic [ref=e252]:
+          - generic [ref=e253]: MOD-02 /// ACTIVE
+          - heading "REAL-TIME SIMULATION ENGINE" [level=3] [ref=e254]
+          - paragraph [ref=e255]: Run high-fidelity simulations without building physical prototypes first.
+          - separator [ref=e256]
+          - generic [ref=e257]:
+            - generic [ref=e258]:
+              - term [ref=e259]: "01"
+              - definition [ref=e260]: Automatically generate behavioral models from component datasheets and specifications.
+            - generic [ref=e261]:
+              - term [ref=e262]: "02"
+              - definition [ref=e263]: Simulate electrical, thermal, and mechanical behavior in a unified environment.
+            - generic [ref=e264]:
+              - term [ref=e265]: "03"
+              - definition [ref=e266]: Iterate on designs in minutes instead of waiting weeks for prototype hardware.
+          - separator [ref=e267]
+          - status [ref=e269]: ">>> Validate your design before you order a single part."
+        - generic [ref=e271]:
+          - generic [ref=e272]:
+            - generic [ref=e273]: ●
+            - generic [ref=e274]: ORIV://SIMULATION-ENGINE
+          - generic [ref=e275]:
+            - generic [ref=e276]: "> LOADING SYSTEM TOPOLOGY..."
+            - generic [ref=e277]: "> GENERATING BEHAVIORAL MODELS..."
+            - generic [ref=e278]: "> RUNNING THERMAL ANALYSIS..."
+            - generic [ref=e279]: "> COMPUTING TRANSIENT RESPONSE..."
+            - generic [ref=e280]: "> SIMULATION COMPLETE — 0 VIOLATIONS [1.2s]"
+            - generic [ref=e281]: █████████████████████ 100%
+    - generic [ref=e131]:
+      - generic [ref=e133]:
+        - generic [ref=e134]: "[ ENTERPRISE COMPLIANCE & SECURITY ]"
+        - generic [ref=e135]: "TRUST LEVEL: MAXIMUM"
+      - generic [ref=e137]:
+        - heading "TRUSTED & SCALABLE INFRASTRUCTURE" [level=2] [ref=e138]:
+          - text: TRUSTED &
+          - text: SCALABLE
+          - text: INFRASTRUCTURE
+        - paragraph [ref=e139]: Built on trust with security, compliance, and scale in mind.
+      - generic [ref=e140]:
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e144]: SEC-01
+            - generic [ref=e145]: VERIFIED
+          - separator [ref=e146]
+          - heading "SOC II COMPLIANCE" [level=3] [ref=e147]
+          - paragraph [ref=e148]: Independent audit standards ensuring Oriv meets the highest levels of data security and privacy.
+        - generic [ref=e150]:
+          - generic [ref=e151]:
+            - generic [ref=e152]: SEC-02
+            - generic [ref=e153]: COMPLIANT
+          - separator [ref=e154]
+          - heading "GDPR READY" [level=3] [ref=e155]
+          - paragraph [ref=e156]: Built with data protection and privacy by design, fully aligned with European GDPR regulations.
+        - generic [ref=e158]:
+          - generic [ref=e159]:
+            - generic [ref=e160]: SEC-03
+            - generic [ref=e161]: OPERATIONAL
+          - separator [ref=e162]
+          - heading "CLOUD MANAGED" [level=3] [ref=e163]
+          - paragraph [ref=e164]: Secure, scalable, and always up to date. Managed seamlessly for maximum reliability.
+        - generic [ref=e166]:
+          - generic [ref=e167]:
+            - generic [ref=e168]: SEC-04
+            - generic [ref=e169]: ENFORCED
+          - separator [ref=e170]
+          - heading "ROLE-BASED ACCESS CONTROL" [level=3] [ref=e171]
+          - paragraph [ref=e172]: Fine-grained permissions and access policies ensure users only see what they need to.
+    - generic [ref=e173]:
+      - generic [ref=e175]:
+        - generic [ref=e176]: "[ FAQ ]"
+        - generic [ref=e177]: 5 ENTRIES INDEXED
+      - generic [ref=e179]:
+        - heading "FREQUENTLY ASKED QUESTIONS" [level=2] [ref=e180]:
+          - text: FREQUENTLY
+          - text: ASKED QUESTIONS
+        - paragraph [ref=e181]: These are the most commonly asked questions about Oriv Studio.
+      - generic [ref=e182]:
+        - button "Q-01 How does Oriv ensure the component data is accurate? [ + ]" [ref=e184]:
+          - generic [ref=e185]:
+            - generic [ref=e186]:
+              - generic [ref=e187]: Q-01
+              - heading "How does Oriv ensure the component data is accurate?" [level=3] [ref=e188]
+            - generic [ref=e189]: "[ + ]"
+        - button "Q-02 Does the AI model hallucinate physics behaviors? [ + ]" [ref=e191]:
+          - generic [ref=e192]:
+            - generic [ref=e193]:
+              - generic [ref=e194]: Q-02
+              - heading "Does the AI model hallucinate physics behaviors?" [level=3] [ref=e195]
+            - generic [ref=e196]: "[ + ]"
+        - button "Q-03 Can I validate the models before building hardware? [ + ]" [ref=e198]:
+          - generic [ref=e199]:
+            - generic [ref=e200]:
+              - generic [ref=e201]: Q-03
+              - heading "Can I validate the models before building hardware?" [level=3] [ref=e202]
+            - generic [ref=e203]: "[ + ]"
+        - button "Q-04 Is my proprietary data used to train your global AI? [ + ]" [ref=e205]:
+          - generic [ref=e206]:
+            - generic [ref=e207]:
+              - generic [ref=e208]: Q-04
+              - heading "Is my proprietary data used to train your global AI?" [level=3] [ref=e209]
+            - generic [ref=e210]: "[ + ]"
+        - button "Q-05 Can I integrate my own internal component libraries? [ + ]" [ref=e212]:
+          - generic [ref=e213]:
+            - generic [ref=e214]:
+              - generic [ref=e215]: Q-05
+              - heading "Can I integrate my own internal component libraries?" [level=3] [ref=e216]
+            - generic [ref=e217]: "[ + ]"
+  - contentinfo [ref=e218]:
+    - generic [ref=e220]:
+      - generic [ref=e221]:
+        - generic [ref=e222]: "[ SUBSCRIBE ]"
+        - heading "STAY AHEAD WITH ORIV" [level=2] [ref=e223]:
+          - text: STAY AHEAD
+          - text: WITH ORIV
+      - generic [ref=e224]:
+        - paragraph [ref=e225]: Subscribe to our newsletter for the latest updates on smart system engineering, industry insights, and exclusive product announcements.
+        - generic [ref=e226]:
+          - textbox "YOU@COMPANY.COM" [ref=e227]
+          - button "SUBMIT >>>" [ref=e228]
+        - generic [ref=e229]: /// NO SPAM, JUST MEANINGFUL UPDATES.
+    - generic [ref=e231]:
+      - generic [ref=e232]: © 2026 ORIV, INC. ALL RIGHTS RESERVED.
+      - generic [ref=e233]:
+        - link "[ ABOUT US ]" [ref=e234] [cursor=pointer]:
+          - /url: "#"
+        - link "[ CAREERS ]" [ref=e235] [cursor=pointer]:
+          - /url: "#"
+        - link "[ PRIVACY POLICY ]" [ref=e236] [cursor=pointer]:
+          - /url: "#"
+        - link "[ LINKEDIN ]" [ref=e237] [cursor=pointer]:
+          - /url: https://linkedin.com/company/oriv-io
+  - button "Open Next.js Dev Tools" [ref=e243] [cursor=pointer]:
+    - img [ref=e244]
+  - alert [ref=e249]

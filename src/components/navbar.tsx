@@ -33,60 +33,59 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 border-b border-line bg-background/95 backdrop-blur-sm transition-shadow duration-300 ${
-        scrolled ? "shadow-[0_1px_12px_rgba(0,0,0,0.5)]" : ""
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-background/90 backdrop-blur-md border-b border-line shadow-[0_1px_20px_rgba(0,0,0,0.04)]"
+          : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-3">
-        {/* Logo */}
-        <a href="#" className="flex items-center">
+      <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4">
+        <a href="#" className="flex items-center transition-opacity duration-300 hover:opacity-70">
           <Image src="/oriv_logo.svg" alt="Oriv Studio" width={80} height={28} priority />
         </a>
 
-        {/* Desktop links */}
-        <div className="hidden items-center gap-0 md:flex">
+        <div className="hidden items-center gap-1 md:flex">
           {links.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="type-micro border-l border-line px-5 py-2 text-muted transition-colors hover:text-foreground hover:bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]"
+              className="type-micro px-4 py-2 text-muted transition-colors duration-300 hover:text-foreground rounded-md hover:bg-surface"
             >
-              [ {link.label} ]
+              {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="ml-0 border-l border-line bg-accent px-5 py-2 type-micro text-background font-bold tracking-[0.1em] transition-all hover:bg-accent/80 focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-[-2px]"
+            className="ml-2 bg-accent px-5 py-2.5 type-micro text-foreground font-bold tracking-[0.1em] rounded-md btn-press transition-all duration-300 hover:bg-accent/80 hover:shadow-[0_4px_16px_rgba(255,197,46,0.3)]"
           >
             REQUEST ACCESS
           </a>
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className="type-micro text-muted md:hidden focus-visible:outline-2 focus-visible:outline-accent"
+          className="type-micro text-muted md:hidden focus-visible:outline-2 focus-visible:outline-accent transition-colors duration-200 hover:text-foreground"
           aria-label="Toggle menu"
           aria-expanded={open}
         >
-          {open ? "[ CLOSE ]" : "[ MENU ]"}
+          {open ? "CLOSE" : "MENU"}
         </button>
       </nav>
 
-      {/* Mobile menu */}
       {open && (
         <>
           <div
-            className="fixed inset-0 top-[49px] bg-background/80 backdrop-blur-sm md:hidden z-40"
+            className="fixed inset-0 top-[60px] bg-background/60 backdrop-blur-sm md:hidden z-40"
             onClick={() => setOpen(false)}
           />
           <div className="relative z-50 border-t border-line bg-background md:hidden">
-            {links.map((link) => (
+            {links.map((link, i) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="type-micro block border-b border-line px-6 py-3 text-muted hover:text-foreground hover:bg-surface"
+                className="type-micro block border-b border-line px-6 py-4 text-muted hover:text-foreground hover:bg-surface transition-all duration-200"
+                style={{ animationDelay: `${i * 50}ms` }}
               >
                 {link.label}
               </a>
@@ -94,7 +93,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="block bg-accent px-6 py-3 type-micro text-background font-bold"
+              className="block bg-accent px-6 py-4 type-micro text-foreground font-bold"
             >
               REQUEST ACCESS
             </a>

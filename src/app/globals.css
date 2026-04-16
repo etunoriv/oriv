@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  /* === ORIV BRAND HEXES / TACTICAL APPLICATION === */
   --bg: #FAFAFA;
   --fg: #181818;
-  --accent: #FFC52E;       /* Oriv Yellow — sole accent, no restrictions */
+  --accent: #FFC52E;
   --surface: #F0F0F0;
   --muted: #6B6B6B;
   --dim: #999999;
-  --line: #E0E0E0;
+  --line: #E8E8E8;
 }
 
 @theme inline {
@@ -23,10 +22,6 @@
   --font-mono: var(--font-jetbrains);
 }
 
-* {
-  border-radius: 0 !important;
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -34,43 +29,8 @@ html {
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-mono), monospace;
-}
-
-/* === CRT SCANLINES === */
-.scanlines::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.08) 2px,
-    rgba(0, 0, 0, 0.08) 4px
-  );
-  pointer-events: none;
-  z-index: 9999;
-}
-
-/* === MECHANICAL NOISE === */
-.noise::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9998;
-}
-
-/* === GRID DIVIDERS (gap-based) === */
-.grid-dividers {
-  display: grid;
-  gap: 1px;
-  background: var(--line);
-}
-.grid-dividers > * {
-  background: var(--bg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
 /* === MACRO TYPOGRAPHY === */
@@ -79,10 +39,10 @@ body {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.04em;
-  line-height: 0.9;
+  line-height: 0.92;
 }
 
-/* === MICRO TYPOGRAPHY (telemetry) === */
+/* === MICRO TYPOGRAPHY === */
 .type-micro {
   font-family: var(--font-mono), monospace;
   font-size: 0.75rem;
@@ -92,17 +52,12 @@ body {
   color: var(--muted);
 }
 
-/* === ACCENT STRIKE === */
+/* === ACCENT LINE === */
 .accent-line {
   display: block;
   width: 100%;
   height: 2px;
   background: var(--accent);
-}
-
-/* === PHOSPHOR GLOW === */
-.glow-accent {
-  text-shadow: 0 0 10px rgba(255, 197, 46, 0.6);
 }
 
 /* === SELECTION === */
@@ -134,10 +89,29 @@ body {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  border-radius: 0 0 6px 6px;
   transition: top 0.2s;
 }
 .skip-link:focus {
-  top: 8px;
+  top: 0;
+}
+
+/* === CARD HOVER LIFT === */
+.card-hover {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
+}
+
+/* === BUTTON PRESS === */
+.btn-press {
+  transition: transform 0.15s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.btn-press:active {
+  transform: scale(0.97) translateY(1px);
 }
 
 /* === REDUCED MOTION === */

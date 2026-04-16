@@ -1,117 +1,109 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import ScrollReveal from "@/components/scroll-reveal";
 
 const faqs = [
   {
-    id: "Q-01",
     q: "Where does the component data come from?",
     a: "We index real manufacturer datasheets and build a structured knowledge base from the source. We do not generate specs. Every data point traces back to the original document so your engineers can verify what they are looking at.",
   },
   {
-    id: "Q-02",
     q: "Can I trust the simulation results?",
     a: "The models are generated from real component parameters, not approximated. And we are built around a human-in-the-loop approach. Your engineers verify system behavior through rapid control prototyping tools before anything goes to production.",
   },
   {
-    id: "Q-03",
     q: "How does this work with our existing EDA tools?",
     a: "Oriv sits alongside your existing stack. If your team uses Altium, KiCad, or similar tools, Oriv handles the upstream selection and validation work. We are not replacing your EDA. We are replacing the spreadsheets and manual processes that feed into it.",
   },
   {
-    id: "Q-04",
     q: "Is our proprietary data used to train a shared model?",
     a: "No. Your project data is completely isolated. We adhere to SOC II compliance and GDPR regulations. Your designs, component selections, and simulation results are never used to train any model outside your account.",
   },
   {
-    id: "Q-05",
     q: "What does a pilot look like?",
     a: "We run a focused engagement with your engineering team using real components and real constraints from an active program. The goal is to prove three things: less time selecting, less burden re-reading datasheets, and fewer errors in extracted data. You will know if Oriv works for you within weeks, not months.",
   },
   {
-    id: "Q-06",
     q: "Can we bring our own internal component libraries?",
     a: "Yes. Oriv provides a global market knowledge base, but the platform is designed to integrate with your internal libraries and preferred supplier lists. Your institutional knowledge does not get left behind.",
   },
 ];
 
-function FaqItem({ id, q, a }: { id: string; q: string; a: string }) {
+function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-line">
+    <div className={`${index < faqs.length - 1 ? "border-b border-line" : ""}`}>
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left px-6 py-5 transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]"
+        className="w-full text-left px-0 py-6 group focus-visible:outline-2 focus-visible:outline-accent"
         aria-expanded={open}
       >
         <div className="flex items-start justify-between gap-6">
-          <div className="flex items-start gap-4">
-            <samp className="type-micro text-dim font-bold shrink-0 mt-0.5">{id}</samp>
-            <h3 className="type-micro text-foreground font-bold text-sm tracking-[0.04em]">
-              {q}
-            </h3>
-          </div>
-          <samp className="type-micro text-accent shrink-0">
-            {open ? "[ \u2014 ]" : "[ + ]"}
-          </samp>
+          <h3 className="text-foreground font-medium text-base md:text-lg leading-snug group-hover:text-accent transition-colors duration-300">
+            {q}
+          </h3>
+          <motion.span
+            animate={{ rotate: open ? 45 : 0 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="type-micro text-accent shrink-0 mt-1 text-lg font-bold"
+          >
+            +
+          </motion.span>
         </div>
       </button>
-      {open && (
-        <div className="px-6 pb-5">
-          <div className="ml-12 border-l-2 border-accent pl-4">
-            <p className="font-mono text-muted leading-relaxed text-xs tracking-wide">
-              {a}
-            </p>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="pb-6">
+              <p className="text-muted leading-relaxed max-w-2xl" style={{ fontSize: "0.9rem" }}>
+                {a}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
 export default function Faq() {
   return (
-    <section className="border-b border-line">
-      {/* Section header */}
-      <div className="border-b border-line px-6 py-4">
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between">
-          <span className="type-micro text-accent font-bold">[ FAQ ]</span>
-          <span className="type-micro">THE QUESTIONS ENGINEERS ACTUALLY ASK</span>
+    <section className="py-24 md:py-32 bg-surface/50">
+      <div className="mx-auto max-w-[1400px] px-6">
+        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16">
+          <ScrollReveal>
+            <div className="lg:sticky lg:top-32">
+              <span className="type-micro text-accent font-bold block mb-6">/// FAQ</span>
+              <h2
+                className="type-macro text-foreground"
+                style={{ fontSize: "clamp(2rem, 4vw, 4rem)" }}
+              >
+                STRAIGHT <span className="text-accent">ANSWERS</span>
+              </h2>
+              <p className="mt-4 text-muted leading-relaxed" style={{ fontSize: "0.9rem" }}>
+                The questions engineers actually ask during evaluations.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <div>
+              {faqs.map((faq, i) => (
+                <FaqItem key={i} q={faq.q} a={faq.a} index={i} />
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </div>
-
-      {/* Title */}
-      <div className="border-b border-line px-6 py-12">
-        <div className="mx-auto max-w-[1400px]">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="type-macro text-foreground"
-            style={{ fontSize: "clamp(2rem, 6vw, 7rem)" }}
-          >
-            STRAIGHT
-            <br />
-            <span className="text-accent">ANSWERS</span>
-          </motion.h2>
-        </div>
-      </div>
-
-      {/* FAQ list */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4 }}
-        className="mx-auto max-w-[1400px]"
-      >
-        {faqs.map((faq) => (
-          <FaqItem key={faq.id} id={faq.id} q={faq.q} a={faq.a} />
-        ))}
-      </motion.div>
     </section>
   );
 }
