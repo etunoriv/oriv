@@ -472,24 +472,33 @@ function BookerDialog() {
                   Each slot is h-8 with internal items-center so glyphs and
                   text share an identical vertical center line. */}
               <div className="flex h-8 items-center justify-between px-6 pt-5 md:px-8">
-                <div className="flex h-8 items-center gap-3">
-                  {step !== "archetype" && step !== "success" ? (
-                    <button
-                      type="button"
-                      onClick={goBack}
-                      className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--on-surface-variant)] transition-colors hover:bg-[var(--surface-container)] hover:text-[var(--on-surface)]"
-                      aria-label="Back"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
-                        <path d="M7.5 2.5L4 6l3.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </button>
-                  ) : (
-                    <div className="h-8 w-8" />
-                  )}
-                  <span className="label-mono inline-flex h-8 items-center text-[10px] leading-none tracking-[0.18em] text-[var(--outline)]">
+                <div className="flex h-8 items-center">
+                  <AnimatePresence initial={false}>
+                    {step !== "archetype" && step !== "success" && (
+                      <motion.button
+                        key="back"
+                        type="button"
+                        onClick={goBack}
+                        initial={{ width: 0, opacity: 0, marginRight: 0 }}
+                        animate={{ width: 32, opacity: 1, marginRight: 12 }}
+                        exit={{ width: 0, opacity: 0, marginRight: 0 }}
+                        transition={{ duration: 0.28, ease: EASE }}
+                        className="flex h-8 shrink-0 items-center justify-center overflow-hidden rounded-full text-[var(--on-surface-variant)] transition-colors hover:bg-[var(--surface-container)] hover:text-[var(--on-surface)]"
+                        aria-label="Back"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+                          <path d="M7.5 2.5L4 6l3.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </motion.button>
+                    )}
+                  </AnimatePresence>
+                  <motion.span
+                    layout
+                    transition={{ duration: 0.28, ease: EASE }}
+                    className="label-mono inline-flex h-8 items-center text-[10px] leading-none tracking-[0.18em] text-[var(--outline)]"
+                  >
                     {step === "success" ? "BOOKED" : "TALK TO A CO-FOUNDER"}
-                  </span>
+                  </motion.span>
                 </div>
                 <button
                   type="button"
