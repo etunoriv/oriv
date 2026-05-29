@@ -1,79 +1,65 @@
 "use client";
 
-import ScrollReveal from "@/components/scroll-reveal";
+import { Reveal, Stagger, Item } from "@/lib/motion";
 
-const items = [
+/**
+ * Compliance — Linear-disciplined spec table.
+ *
+ * Three buckets as left-aligned rows in a single table-style layout.
+ * Engineers scan this; structure beats flourish.
+ */
+
+const buckets = [
   {
-    title: "YOUR DATA STAYS YOURS",
-    description:
-      "Project data is isolated per account. We do not use your proprietary designs, component selections, or simulation results to train any shared model. Period.",
-    status: "ENFORCED",
+    label: "Available now",
+    items: [
+      { name: "ITAR-ready deployment", note: "US-persons-only · AWS GovCloud · Azure Government" },
+      { name: "On-prem & private cloud", note: "VPC · dedicated tenancy · air-gapped" },
+      { name: "ISO 26262 traceability", note: "ASIL evidence chains · per-field provenance" },
+      { name: "FDA 21 CFR Part 11", note: "Electronic records · MedTech DHF" },
+    ],
   },
   {
-    title: "SOC II COMPLIANT",
-    description:
-      "Independent audit standards for data security, availability, and confidentiality. Not a checkbox exercise. The baseline for earning enterprise trust.",
-    status: "VERIFIED",
+    label: "Default behavior",
+    items: [
+      { name: "Tenant isolation", note: "Your private extensions never leave your tenant. Ever." },
+      { name: "Provenance & audit log", note: "Every record cites its source page, table, and run." },
+    ],
   },
   {
-    title: "GDPR ALIGNED",
-    description:
-      "Data protection and privacy by design. Full alignment with European GDPR regulations. Your European teams can use Oriv without a legal review that takes longer than the pilot.",
-    status: "COMPLIANT",
-  },
-  {
-    title: "ROLE-BASED ACCESS",
-    description:
-      "Fine-grained permissions so engineers see what they need and nothing else. When IT and security ask about access control during procurement, the answer is already documented.",
-    status: "ACTIVE",
+    label: "In progress",
+    items: [
+      { name: "FedRAMP Moderate", note: "Authorization underway · IL5 scoped for DoD primes" },
+      { name: "IEC 62443 / SOC 2 Type II", note: "Industrial cyber controls · SOC 2 audit underway" },
+    ],
   },
 ];
 
 export default function Compliance() {
   return (
-    <section className="py-24 md:py-32">
-      <div className="mx-auto max-w-[1400px] px-6">
-        <ScrollReveal>
-          <div className="mb-16">
-            <span className="type-micro text-accent font-bold block mb-6">/// TRUST & SECURITY</span>
-            <h2
-              className="type-macro text-foreground"
-              style={{ fontSize: "clamp(2rem, 5vw, 5.5rem)" }}
-            >
-              SECURITY THAT <span className="text-accent">PASSES</span> PROCUREMENT
-            </h2>
-            <p className="mt-6 text-muted max-w-xl leading-relaxed" style={{ fontSize: "0.95rem" }}>
-              We built Oriv for teams where IT, legal, and compliance have
-              a seat at the table. Because in automotive, defense, and
-              industrial automation, they always do.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <ScrollReveal staggerChildren stagger={0.1}>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {items.map((item) => (
-              <div
-                key={item.title}
-                className="card-hover bg-white border border-line rounded-lg p-6 flex flex-col justify-between min-h-[220px]"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <samp className="type-micro text-accent font-bold">
-                      {item.status}
-                    </samp>
-                  </div>
-                  <h3 className="type-micro text-foreground font-bold text-sm tracking-[0.04em] mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted leading-relaxed text-sm">
-                    {item.description}
-                  </p>
-                </div>
+    <section id="trust" className="relative bg-[var(--surface)] py-20 md:py-32">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <Stagger className="border-t border-[var(--border-subtle)]" step={0.1} delayChildren={0.05}>
+          {buckets.map((b) => (
+            <Item key={b.label}>
+              <div className="grid grid-cols-1 items-start gap-6 border-b border-[var(--border-subtle)] py-10 md:grid-cols-[200px_minmax(0,_1fr)] md:gap-12">
+                <h3 className="headline-sm text-[var(--on-surface)]">{b.label}</h3>
+                <Stagger className="space-y-5" step={0.05} delayChildren={0.1}>
+                  {b.items.map((item) => (
+                    <Item key={item.name}>
+                      <div className="grid grid-cols-1 gap-1 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.2fr)] md:gap-8">
+                        <p className="text-[14px] font-medium text-[var(--on-surface)]">
+                          {item.name}
+                        </p>
+                        <p className="body-md text-[var(--on-surface-variant)]">{item.note}</p>
+                      </div>
+                    </Item>
+                  ))}
+                </Stagger>
               </div>
-            ))}
-          </div>
-        </ScrollReveal>
+            </Item>
+          ))}
+        </Stagger>
       </div>
     </section>
   );

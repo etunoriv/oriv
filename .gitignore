@@ -39,3 +39,23 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local dev artifacts — not source-of-truth, not for the repo
+.playwright-mcp/
+.firecrawl/
+.claude/settings.local.json
+audit-*.png
+audit-*.jpeg
+glow-*.png
+glow-*.jpeg
+m-*.png
+m-*.jpeg
+chip-*.png
+chip-*.jpeg
+hero-*.png
+hero-*.jpeg
+dark-*.png
+dark-*.jpeg
+align-*.png
+animated-*.png
+oriv-*.png

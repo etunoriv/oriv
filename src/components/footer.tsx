@@ -1,83 +1,100 @@
 "use client";
 
-import { useState } from "react";
+import { Logo } from "@/components/ui/logo";
+
+/**
+ * Footer — Linear-style multi-column layout, Oriv-relevant items only.
+ * No dead links per rulebook R5; placeholder items only ship when their
+ * destination page exists.
+ */
+
+const groups = [
+  {
+    heading: "Product",
+    items: [
+      { label: "Platform", href: "/product" },
+      { label: "Built on Oriv", href: "/built-on" },
+      { label: "Trust & compliance", href: "/trust" },
+    ],
+  },
+  {
+    heading: "Company",
+    items: [
+      { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "mailto:hello@oriv.io" },
+    ],
+  },
+  {
+    heading: "Legal",
+    items: [
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+    ],
+  },
+];
+
+function handleManageCookies() {
+  if (typeof window !== "undefined") {
+    alert("Cookie preferences will open here once consent system ships.");
+  }
+}
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email || !email.includes("@")) {
-      setStatus("error");
-      return;
-    }
-    setStatus("success");
-    setEmail("");
-  }
-
   return (
-    <footer>
-      <div className="py-16 px-6 border-t border-line">
-        <div className="mx-auto max-w-[1400px] grid lg:grid-cols-2 gap-12">
-          <div>
-            <span className="type-micro text-accent font-bold block mb-4">/// NEWSLETTER</span>
-            <h2
-              className="type-macro text-foreground"
-              style={{ fontSize: "clamp(1.4rem, 3vw, 3rem)" }}
+    <footer
+      className="border-t border-[var(--border-subtle)] bg-[var(--surface)]"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
+      <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] md:gap-12">
+          {/* Brand column */}
+          <div className="col-span-2 md:col-span-1">
+            <a
+              href="/"
+              aria-label="Oriv home"
+              className="inline-flex items-center text-[var(--on-surface)]"
             >
-              WE SHARE WHAT WE <span className="text-accent">LEARN</span>
-            </h2>
-            <p className="mt-3 text-muted text-base leading-relaxed max-w-md">
-              Product updates and engineering insights from the embedded world.
-              No fluff. No weekly digest nobody reads.
+              <Logo height={24} />
+            </a>
+            <p className="mt-5 max-w-[240px] body-md text-[var(--on-surface-variant)]">
+              The parametric data layer for regulated hardware engineering.
             </p>
           </div>
 
-          <div className="flex flex-col justify-end">
-            <form onSubmit={handleSubmit} className="flex gap-2" noValidate>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (status !== "idle") setStatus("idle");
-                }}
-                placeholder="you@company.com"
-                className="flex-1 border border-line bg-white px-4 py-3 text-foreground text-base rounded-md focus:border-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px] placeholder:text-dim"
-              />
-              <button
-                type="submit"
-                className="bg-accent px-6 py-3 text-foreground font-bold text-sm rounded-md btn-press shrink-0 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(255,197,46,0.3)]"
-              >
-                SUBSCRIBE
-              </button>
-            </form>
-            {status === "idle" && (
-              <span className="type-micro text-dim mt-2">Engineering signal. No noise.</span>
-            )}
-            {status === "success" && (
-              <span className="type-micro text-accent mt-2">You are in. First update drops soon.</span>
-            )}
-            {status === "error" && (
-              <span className="type-micro text-red-500 mt-2">That does not look like a valid email.</span>
-            )}
-          </div>
+          {/* Link columns */}
+          {groups.map((g) => (
+            <div key={g.heading}>
+              <p className="mb-4 text-[12px] font-medium text-[var(--on-surface)]">
+                {g.heading}
+              </p>
+              <ul className="space-y-1">
+                {g.items.map((l) => (
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      className="-mx-1 inline-flex min-h-[44px] items-center rounded px-1 text-[12.5px] text-[var(--on-surface-variant)] transition-colors duration-200 hover:text-[var(--on-surface)] active:bg-white/[0.04] md:min-h-0 md:py-1.5"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+                {g.heading === "Legal" && (
+                  <li>
+                    <button
+                      type="button"
+                      onClick={handleManageCookies}
+                      className="-mx-1 inline-flex min-h-[44px] items-center rounded px-1 text-[12.5px] text-[var(--on-surface-variant)] transition-colors duration-200 hover:text-[var(--on-surface)] active:bg-white/[0.04] md:min-h-0 md:py-1.5"
+                    >
+                      Manage cookies
+                    </button>
+                  </li>
+                )}
+              </ul>
+            </div>
+          ))}
         </div>
-      </div>
 
-      <div className="border-t border-line px-6 py-5">
-        <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-          <span className="type-micro text-dim">
-            &copy; {new Date().getFullYear()} ORIV, INC.
-          </span>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <a href="#" className="type-micro text-muted hover:text-foreground transition-colors duration-300">ABOUT</a>
-            <a href="#" className="type-micro text-muted hover:text-foreground transition-colors duration-300">CAREERS</a>
-            <a href="#" className="type-micro text-muted hover:text-foreground transition-colors duration-300">PRIVACY</a>
-            <a href="https://linkedin.com/company/oriv-io" target="_blank" rel="noopener noreferrer" className="type-micro text-muted hover:text-foreground transition-colors duration-300">LINKEDIN</a>
-          </div>
-        </div>
       </div>
     </footer>
   );

@@ -1,120 +1,478 @@
 @import "tailwindcss";
 
+/*
+ * Minimalist Structuralism — Oriv design system (DARK)
+ * OLED black + warm-white ink + oriv-yellow accent.
+ * High-precision engineering, macro-whitespace, sharp lens.
+ */
+
 :root {
-  --bg: #FAFAFA;
-  --fg: #181818;
-  --accent: #FFC52E;
-  --surface: #F0F0F0;
-  --muted: #6B6B6B;
-  --dim: #999999;
-  --line: #E8E8E8;
+  /* Surface — OLED-tier dark */
+  --surface: #08090A;
+  --surface-dim: #050506;
+  --surface-bright: #0d0e10;
+  --surface-elevated: #131416;
+  --surface-container-lowest: #050506;
+  --surface-container-low: #0c0d0f;
+  --surface-container: #131416;
+  --surface-container-high: #1a1b1d;
+  --surface-container-highest: #212224;
+
+  /* Ink — warm off-white, not pure white */
+  --on-surface: #f5f5f3;
+  --on-surface-variant: rgba(245, 245, 243, 0.62);
+  --inverse-surface: #f5f5f3;
+  --inverse-on-surface: #08090A;
+
+  /* Lines */
+  --outline: rgba(245, 245, 243, 0.40);
+  --outline-variant: rgba(245, 245, 243, 0.18);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --hairline-strong: rgba(255, 255, 255, 0.14);
+
+  /* Brand */
+  --primary: #FFC52E;
+  --on-primary: #1b1c1d;
+  --primary-container: #1b1c1d;
+  --on-primary-container: #848485;
+
+  --oriv-yellow: #FFC52E;
+  --oriv-yellow-deep: #f7be26;
+  --oriv-yellow-ink: #FFC52E; /* on dark, bright yellow IS the accent */
+  --on-oriv-yellow: #1b1c1d;
+  --structural-gray: #717A88;
+
+  /* Status */
+  --error: #ff6b6b;
+
+  /* Fonts injected by next/font */
+  --font-display: var(--font-hanken);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+
+  /* Motion */
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-glide: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-haptic: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ──────────────────────────────────────────────────────
+   LIGHT THEME — page-chrome overrides only.
+   Embedded product mockups (ProductSurface, OrivAgentPanel,
+   Pivot widget chassis, Wedge artifact cards) use hardcoded
+   dark colors and remain dark in light mode by design.
+   ────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  /* Section-bg pair — alternating chapters need real visible contrast.
+     surface = warm white (sections like Hero, Pivot, Use Cases, Final CTA)
+     surface-container-low = cooler tinted off-white (Pain, Wedge, etc.) */
+  --surface: #fbfbf9;
+  --surface-dim: #efefea;
+  --surface-bright: #ffffff;
+  --surface-elevated: #ffffff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #ededea;
+  --surface-container: #e6e5e1;
+  --surface-container-high: #dcdcd7;
+  --surface-container-highest: #d2d1cd;
+
+  --on-surface: #1a1a1a;
+  --on-surface-variant: rgba(26, 26, 26, 0.62);
+  --inverse-surface: #08090A;
+  --inverse-on-surface: #f5f5f3;
+
+  --outline: rgba(26, 26, 26, 0.40);
+  --outline-variant: rgba(26, 26, 26, 0.18);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --hairline: rgba(0, 0, 0, 0.08);
+  --hairline-strong: rgba(0, 0, 0, 0.14);
+
+  /* Brand stays — yellow reads on both, just deepen the ink for AA on light bg */
+  --on-oriv-yellow: #1b1c1d;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+html[data-theme="light"] body {
+  background: var(--surface);
+  color: var(--on-surface);
+}
+html[data-theme="light"] ::selection {
+  background: rgba(255, 197, 46, 0.5);
+  color: var(--on-surface);
 }
 
 @theme inline {
-  --color-background: var(--bg);
-  --color-foreground: var(--fg);
-  --color-accent: var(--accent);
   --color-surface: var(--surface);
-  --color-muted: var(--muted);
-  --color-dim: var(--dim);
-  --color-line: var(--line);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-container: var(--surface-container);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-oriv-yellow: var(--oriv-yellow);
+  --color-structural-gray: var(--structural-gray);
+  --color-hairline: var(--hairline);
+  --color-border-subtle: var(--border-subtle);
+
+  --font-display: var(--font-hanken);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains);
+
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-glide: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-inter), system-ui, sans-serif;
   scroll-behavior: smooth;
+  text-rendering: geometricPrecision;
+  color-scheme: dark;
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  overflow-x: hidden;
+  background: var(--surface);
+  color: var(--on-surface);
+  letter-spacing: -0.005em;
 }
 
-/* === MACRO TYPOGRAPHY === */
-.type-macro {
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
+/* ──────────────────────────────────────────────────────
+   Typography utilities
+   ────────────────────────────────────────────────────── */
+
+.font-display {
+  font-family: var(--font-hanken), system-ui, sans-serif;
+  font-weight: 600;
   letter-spacing: -0.04em;
-  line-height: 0.92;
+  line-height: 1.04;
 }
 
-/* === MICRO TYPOGRAPHY === */
-.type-micro {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.75rem;
+.font-body { font-family: var(--font-inter), system-ui, sans-serif; }
+
+.font-mono,
+.label-mono {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+.headline-xl {
+  font-family: var(--font-hanken), system-ui, sans-serif;
+  font-size: clamp(2.25rem, 4.4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.headline-lg {
+  font-family: var(--font-hanken), system-ui, sans-serif;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.headline-sm {
+  font-family: var(--font-hanken), system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.body-lg {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.body-md {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.eyebrow,
+.label-mono-chip {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  line-height: 1.3;
-  color: var(--muted);
+  color: var(--on-surface-variant);
 }
 
-/* === ACCENT LINE === */
-.accent-line {
-  display: block;
+/* ──────────────────────────────────────────────────────
+   Linear-style cards
+   ────────────────────────────────────────────────────── */
+
+.hair {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--hairline-strong) 24%,
+    var(--hairline-strong) 76%,
+    transparent
+  );
+  height: 1px;
   width: 100%;
-  height: 2px;
-  background: var(--accent);
 }
 
-/* === SELECTION === */
-::selection {
-  background: var(--accent);
-  color: var(--bg);
+.card-linear {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.5rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+  transition:
+    border-color 150ms var(--ease-haptic),
+    transform 150ms var(--ease-haptic),
+    box-shadow 150ms var(--ease-haptic);
 }
 
-/* === FOCUS VISIBLE === */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.card-linear:hover {
+  border-color: rgba(255, 197, 46, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
-:focus:not(:focus-visible) {
+/* ──────────────────────────────────────────────────────
+   Buttons — Attio-shape, dark-mode tuned
+   ────────────────────────────────────────────────────── */
+
+.btn-primary {
+  background: var(--oriv-yellow);
+  color: var(--on-oriv-yellow);
+  border-radius: 0.5rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 0.625rem 1.125rem;
+  transition: transform 150ms var(--ease-haptic), background-color 150ms var(--ease-haptic);
+  border: 0;
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--oriv-yellow-deep); }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--on-surface);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.5rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 0.625rem 1.125rem;
+  transition: border-color 150ms var(--ease-haptic), background-color 150ms var(--ease-haptic);
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  border-color: var(--on-surface);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ──────────────────────────────────────────────────────
+   Form inputs — bottom-border on dark
+   ────────────────────────────────────────────────────── */
+
+.input-line {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0;
+  padding: 0.55rem 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--on-surface);
+  transition: border-color 150ms var(--ease-haptic), box-shadow 150ms var(--ease-haptic);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.input-line::placeholder { color: rgba(245, 245, 243, 0.35); }
+.input-line:focus {
   outline: none;
+  border-bottom-color: var(--on-surface);
+  box-shadow: 0 1px 0 0 var(--oriv-yellow);
 }
 
-/* === SKIP LINK === */
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: 16px;
-  z-index: 10000;
-  padding: 8px 16px;
-  background: var(--accent);
-  color: var(--bg);
-  font-family: var(--font-mono), monospace;
-  font-size: 0.75rem;
+select.input-line {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path d='M1 2.5L4 5.5L7 2.5' stroke='%23f5f5f3' stroke-width='1.2' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.25rem center;
+  padding-right: 1.5rem;
+  color-scheme: dark;
+}
+
+select.input-line option {
+  background: var(--surface-elevated);
+  color: var(--on-surface);
+}
+
+/* ──────────────────────────────────────────────────────
+   Chips
+   ────────────────────────────────────────────────────── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-elevated);
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-radius: 0 0 6px 6px;
-  transition: top 0.2s;
-}
-.skip-link:focus {
-  top: 0;
+  color: var(--on-surface-variant);
 }
 
-/* === CARD HOVER LIFT === */
-.card-hover {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
+.chip-accent {
+  background: rgba(255, 197, 46, 0.12);
+  border-color: rgba(255, 197, 46, 0.4);
+  color: var(--oriv-yellow);
 }
 
-/* === BUTTON PRESS === */
-.btn-press {
-  transition: transform 0.15s ease, background-color 0.3s ease, color 0.3s ease;
-}
-.btn-press:active {
-  transform: scale(0.97) translateY(1px);
+/* ──────────────────────────────────────────────────────
+   Liquid-glass (dark variant)
+   ────────────────────────────────────────────────────── */
+
+.liquid-glass {
+  background: rgba(20, 22, 25, 0.55);
+  backdrop-filter: saturate(160%) blur(20px);
+  -webkit-backdrop-filter: saturate(160%) blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 8px 28px -10px rgba(0, 0, 0, 0.5);
 }
 
-/* === REDUCED MOTION === */
+.liquid-glass-strong {
+  background: rgba(20, 22, 25, 0.78);
+  backdrop-filter: saturate(180%) blur(28px);
+  -webkit-backdrop-filter: saturate(180%) blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 14px 40px -14px rgba(0, 0, 0, 0.6);
+}
+
+/* ──────────────────────────────────────────────────────
+   Liquid-logo sheen — bright yellow on dark works at AAA
+   ────────────────────────────────────────────────────── */
+
+.liquid-logo {
+  background: linear-gradient(
+    100deg,
+    var(--on-surface) 0%,
+    var(--on-surface) 38%,
+    var(--oriv-yellow) 50%,
+    var(--on-surface) 62%,
+    var(--on-surface) 100%
+  );
+  background-size: 280% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: liquid-sheen 7s linear infinite;
+}
+
+.liquid-logo-dark {
+  background: linear-gradient(
+    100deg,
+    var(--on-surface) 0%,
+    var(--on-surface) 42%,
+    var(--oriv-yellow) 50%,
+    var(--on-surface) 58%,
+    var(--on-surface) 100%
+  );
+  background-size: 280% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: liquid-sheen 9s linear infinite;
+}
+
+/* Continuous 9s sweep, no parked dwell — eliminates the "yellow paused on
+   hardware" artifact that the dwell + iteration-boundary snap was producing. */
+@keyframes liquid-sheen {
+  from { background-position: 200% 0; }
+  to   { background-position: -80% 0; }
+}
+
+/* ──────────────────────────────────────────────────────
+   Reveal motion
+   ────────────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 700ms var(--ease-spring),
+    transform 700ms var(--ease-spring);
+  will-change: opacity, transform;
+}
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ──────────────────────────────────────────────────────
+   Micro-interactions
+   ────────────────────────────────────────────────────── */
+
+.mag {
+  transition: transform 300ms var(--ease-spring), background-color 150ms var(--ease-haptic);
+}
+.mag:active { transform: scale(0.98); }
+.mag .arrow { transition: transform 300ms var(--ease-spring); }
+.mag:hover .arrow { transform: translate(2px, -2px); }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 38s linear infinite; }
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -10px, 0); }
+}
+.drift { animation: drift 9s ease-in-out infinite; }
+
+:focus-visible {
+  outline: 1px solid var(--oriv-yellow);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(255, 197, 46, 0.4);
+  color: var(--on-surface);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -122,4 +480,10 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .reveal { opacity: 1; transform: none; }
+  .liquid-logo, .liquid-logo-dark {
+    animation: none;
+    background-position: 0 0;
+  }
+  .marquee, .drift { animation: none !important; }
 }

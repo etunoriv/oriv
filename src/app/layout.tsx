@@ -1,40 +1,84 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Hanken_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { BookerProvider } from "@/components/booker";
 import "./globals.css";
+
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
 });
 
 const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500"],
 });
 
+const SITE_URL = "https://oriv.io";
+const TITLE = "Oriv. The parametric data layer for hardware engineering.";
+const DESCRIPTION =
+  "Oriv turns public datasheets and your private specs into one canonical schema. Queryable from EDA, PLM, ERP, and any AI agent your engineers run.";
+
 export const metadata: Metadata = {
-  title: "ORIV STUDIO",
-  description:
-    "Oriv Studio turns the global component market into a searchable knowledge base. Select parts in minutes, simulate behavior, connect to hardware, and monitor everything from one workspace.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: SITE_URL },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: "Oriv",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    site: "@oriv_io",
+  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafaf8" },
+    { media: "(prefers-color-scheme: dark)", color: "#08090A" },
+  ],
+  colorScheme: "light dark",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="en"
-      className={`${inter.variable} ${jetbrains.variable}`}
+      lang="en-US"
+      data-theme="dark"
+      style={{ colorScheme: "dark" }}
+      className={`${hanken.variable} ${inter.variable} ${jetbrains.variable}`}
     >
-      <body className="min-h-[100dvh] flex flex-col overflow-x-hidden">
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-        {children}
+      <head>
+        {/* Cal.com element-click embed (orivstudio/demo) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+Cal("init", "demo", {origin:"https://app.cal.com"});
+Cal.ns.demo("ui", {"theme":"dark","cssVarsPerTheme":{"light":{"cal-brand":"#FFC52E"},"dark":{"cal-brand":"#FFC52E"}},"hideEventTypeDetails":false,"layout":"month_view"});`,
+          }}
+        />
+      </head>
+      <body className="min-h-[100dvh] antialiased">
+        <BookerProvider>{children}</BookerProvider>
       </body>
     </html>
   );
