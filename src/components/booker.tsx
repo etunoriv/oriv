@@ -973,7 +973,7 @@ function SuccessStep({
   onClose: () => void;
 }) {
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex min-h-[400px] flex-col items-center justify-center text-center">
       <motion.div
         initial={{ scale: 0.6, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
