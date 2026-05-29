@@ -159,7 +159,7 @@ export default function ProductSurface() {
           behind the body background. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-6 -top-6 -z-10 h-32 w-32 rounded-full opacity-60 blur-3xl"
+        className="pointer-events-none absolute -right-4 -top-4 -z-10 h-20 w-20 rounded-full opacity-55 blur-2xl"
         style={{ background: "rgba(255,197,46,0.35)" }}
       />
     </div>

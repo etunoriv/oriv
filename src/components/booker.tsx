@@ -359,6 +359,17 @@ function BookerDialog() {
     };
   }, [open, setOpen]);
 
+  // Track whether we're on a mobile viewport so the entry animation slides
+  // up from the bottom edge like a drawer, vs. a small fade-in pop on desktop.
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
   // Focus restore — remember whatever element had focus when the booker
   // opened (typically the CTA button), and send focus back there once the
   // close animation finishes. Keyboard / screen-reader users land back
@@ -434,13 +445,28 @@ function BookerDialog() {
           role="dialog"
         >
           <motion.div
-            initial={{ y: 24, opacity: 0, scale: 0.985 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 16, opacity: 0, scale: 0.99 }}
-            transition={{ duration: 0.32, ease: EASE }}
+            initial={isMobile ? { y: "100%" } : { y: 24, opacity: 0, scale: 0.985 }}
+            animate={isMobile ? { y: 0 } : { y: 0, opacity: 1, scale: 1 }}
+            exit={isMobile ? { y: "100%" } : { y: 16, opacity: 0, scale: 0.99 }}
+            transition={{
+              duration: isMobile ? 0.42 : 0.32,
+              ease: isMobile ? [0.32, 0.72, 0, 1] : EASE,
+            }}
+            drag={isMobile ? "y" : false}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={{ top: 0, bottom: 0.4 }}
+            onDragEnd={(_, info) => {
+              if (info.offset.y > 120 || info.velocity.y > 600) setOpen(false);
+            }}
             className="relative w-full overflow-hidden rounded-t-[1.75rem] bg-[var(--surface-container-low)] p-1.5 ring-1 ring-black/5 md:m-6 md:max-w-[640px] md:rounded-[2rem]"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Drag handle — mobile only. Signals the sheet can be dismissed
+                by dragging downward. */}
+            <div
+              aria-hidden
+              className="mx-auto mt-1 mb-1.5 h-1 w-9 rounded-full bg-[var(--outline)]/40 md:hidden"
+            />
             <div className="relative rounded-[calc(1.75rem-0.375rem)] bg-[var(--surface)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] md:rounded-[calc(2rem-0.375rem)]">
               {/* top bar — back / label / close all sit on a single 32px row.
                   Each slot is h-8 with internal items-center so glyphs and

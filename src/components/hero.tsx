@@ -37,8 +37,7 @@ export default function Hero() {
             transition={{ duration: 1.05, ease, delay: 0.06 }}
             className="font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-[var(--on-surface)]"
           >
-            The parametric data layer for{" "}
-            <span className="liquid-logo-dark">hardware engineering</span>.
+            The parametric data layer for hardware engineering.
           </motion.h1>
         </div>
 
