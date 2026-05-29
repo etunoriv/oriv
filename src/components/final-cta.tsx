@@ -42,9 +42,6 @@ export default function FinalCTA() {
             <span>Talk to a co-founder</span>
             <span aria-hidden>→</span>
           </button>
-          <p className="mt-4 font-mono text-[12px] text-[var(--outline)]">
-            hello@oriv.io
-          </p>
         </Reveal>
       </div>
     </section>
