@@ -359,6 +359,14 @@ function BookerDialog() {
     };
   }, [open, setOpen]);
 
+  // Reset the body's scroll position whenever the step changes. Without this,
+  // stepping forward from a long Questions step would leave the user looking
+  // halfway down the next step's content.
+  const bodyScrollRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    bodyScrollRef.current?.scrollTo({ top: 0, behavior: "instant" });
+  }, [step]);
+
   // Track whether we're on a mobile viewport so the entry animation slides
   // up from the bottom edge like a drawer, vs. a small fade-in pop on desktop.
   const [isMobile, setIsMobile] = useState(false);
@@ -537,8 +545,12 @@ function BookerDialog() {
                 </div>
               )}
 
-              {/* step body */}
-              <div className="relative min-h-[440px] px-6 pt-6 pb-6 md:px-8 md:pt-8 md:pb-8">
+              {/* step body — fixed height so chrome and pinned CTAs never
+                  move between steps. Step content scrolls inside if needed. */}
+              <div
+                ref={bodyScrollRef}
+                className="relative h-[480px] overflow-y-auto px-6 pt-6 pb-6 md:h-[560px] md:px-8 md:pt-8 md:pb-8"
+              >
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={step}
@@ -546,6 +558,7 @@ function BookerDialog() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.24, ease: EASE }}
+                    className="flex min-h-full flex-col"
                   >
                     {step === "archetype" && (
                       <ArchetypeStep
@@ -616,7 +629,7 @@ function BookerDialog() {
 
 function ArchetypeStep({ onPick }: { onPick: (id: string) => void }) {
   return (
-    <div>
+    <div className="flex h-full flex-col">
       <h2 className="headline-md text-[var(--on-surface)]">
         Which one are you?
       </h2>
@@ -676,6 +689,7 @@ function QuestionsStep({
         e.preventDefault();
         if (!requiredMissing) onNext();
       }}
+      className="flex h-full flex-col"
     >
       <h2 className="headline-md text-[var(--on-surface)]">
         A few quick things about you.
@@ -730,7 +744,7 @@ function QuestionsStep({
           </Field>
         ))}
       </div>
-      <div className="mt-7 flex justify-end">
+      <div className="mt-auto flex justify-end pt-7">
         <button
           type="submit"
           disabled={requiredMissing}
@@ -775,7 +789,7 @@ function SlotStep({
 
   if (loading) {
     return (
-      <div>
+      <div className="flex h-full flex-col">
         <h2 className="headline-md text-[var(--on-surface)]">Pick a time.</h2>
         <p className="mt-2 body-md text-[var(--on-surface-variant)]">
           Loading your available slots…
@@ -796,7 +810,7 @@ function SlotStep({
 
   if (error) {
     return (
-      <div>
+      <div className="flex h-full flex-col">
         <h2 className="headline-md text-[var(--on-surface)]">Couldn&rsquo;t load times.</h2>
         <p className="mt-2 body-md text-[var(--on-surface-variant)]">{error}</p>
         <button
@@ -812,7 +826,7 @@ function SlotStep({
 
   if (!days.length) {
     return (
-      <div>
+      <div className="flex h-full flex-col">
         <h2 className="headline-md text-[var(--on-surface)]">No openings in the next two weeks.</h2>
         <p className="mt-2 body-md text-[var(--on-surface-variant)]">
           Email <a href="mailto:hello@oriv.io" className="underline">hello@oriv.io</a> and we&rsquo;ll figure out a time.
@@ -822,7 +836,7 @@ function SlotStep({
   }
 
   return (
-    <div>
+    <div className="flex h-full flex-col">
       <h2 className="headline-md text-[var(--on-surface)]">Pick a time.</h2>
       <p className="mt-2 body-md text-[var(--on-surface-variant)]">
         All slots in your local timezone.
@@ -918,6 +932,7 @@ function ConfirmStep({
         e.preventDefault();
         if (valid) onConfirm();
       }}
+      className="flex h-full flex-col"
     >
       <h2 className="headline-md text-[var(--on-surface)]">Just one more thing.</h2>
       <p className="mt-2 body-md text-[var(--on-surface-variant)]">
@@ -963,7 +978,7 @@ function ConfirmStep({
         </p>
       )}
 
-      <div className="mt-7 flex items-center justify-end gap-4">
+      <div className="mt-auto flex items-center justify-end gap-4 pt-7">
         <button
           type="submit"
           disabled={!valid || loading}
@@ -1008,7 +1023,7 @@ function SuccessStep({
   onClose: () => void;
 }) {
   return (
-    <div className="flex min-h-[400px] flex-col items-center justify-center text-center">
+    <div className="flex h-full flex-col items-center justify-center text-center">
       <motion.div
         initial={{ scale: 0.6, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
