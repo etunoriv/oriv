@@ -1,183 +1,176 @@
 "use client";
 
-import { useState } from "react";
-import { Reveal, Stagger, Item } from "@/lib/motion";
+import { useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Reveal } from "@/lib/motion";
 
 /**
- * IntegrationGrid — full integration surface on /built-on.
- * Five categories, named tools, query interface coverage.
- * Includes "Don't see your tool?" inline form.
+ * IntegrationGrid — the integration index.
+ *
+ * Replaced the tabs-over-3×2-grid pattern with a single editorial catalog:
+ * 30 named integrations, numbered, with inline category filters. Reads like
+ * a product index, not a marketing widget.
  */
 
-const categories = [
-  {
-    id: "eda",
-    label: "EDA · PCB Design",
-    description: "Wire Oriv to your schematic and layout tools. Component properties propagate directly into your parts library.",
-    tools: [
-      { name: "Altium Designer", note: "Native library sync via REST" },
-      { name: "KiCad", note: "Open plugin, community supported" },
-      { name: "Cadence OrCAD / Allegro", note: "CIS connector in progress" },
-      { name: "Mentor PADS / Xpedition", note: "Library adapter via REST" },
-      { name: "Zuken CR-8000", note: "Available via REST API" },
-      { name: "DipTrace", note: "Via REST API" },
-    ],
-  },
-  {
-    id: "plm",
-    label: "PLM · Product Lifecycle",
-    description: "Keep your PLM's BOM clean without manual re-extraction. Oriv is the single source of truth that PLM reads from.",
-    tools: [
-      { name: "Siemens Teamcenter", note: "Integration via Teamcenter connectors" },
-      { name: "Aras Innovator", note: "REST-native, open schema" },
-      { name: "PTC Windchill", note: "Standard REST + webhook events" },
-      { name: "Dassault ENOVIA / 3DEXPERIENCE", note: "REST connector" },
-      { name: "Arena PLM", note: "Native REST API" },
-      { name: "Propel PLM", note: "Salesforce-native, REST" },
-    ],
-  },
-  {
-    id: "erp",
-    label: "ERP · Data Warehouse",
-    description: "Component master data that stays consistent across procurement, inventory, and finance.",
-    tools: [
-      { name: "SAP S/4HANA", note: "Material master sync via REST" },
-      { name: "Oracle Cloud ERP", note: "Item master connector" },
-      { name: "Snowflake", note: "Native SQL. Query Oriv directly" },
-      { name: "Databricks", note: "Delta Lake via SQL connector" },
-      { name: "BigQuery", note: "REST export on schedule or event" },
-      { name: "Redshift", note: "REST export" },
-    ],
-  },
-  {
-    id: "ai",
-    label: "AI · Agents & Copilots",
-    description: "Give your AI agents real component data via MCP. Cursor, Windsurf, Claude Code, and any custom agent that speaks MCP.",
-    tools: [
-      { name: "Cursor", note: "Oriv MCP server. Native tool calls" },
-      { name: "Windsurf (Codeium)", note: "MCP server, same interface" },
-      { name: "Claude Code", note: "MCP server. Zero config" },
-      { name: "OpenAI Assistants", note: "Function calling via REST bridge" },
-      { name: "LangChain / LlamaIndex", note: "REST tool, Python SDK" },
-      { name: "Custom internal agents", note: "MCP or REST. Your choice" },
-    ],
-  },
-  {
-    id: "custom",
-    label: "Custom · APIs & SDKs",
-    description: "Any query shape your team already speaks. Same canonical store, same data, behind every interface.",
-    tools: [
-      { name: "REST API", note: "OpenAPI 3.1 spec, versioned" },
-      { name: "GraphQL", note: "Typed schema, introspectable" },
-      { name: "SQL", note: "Standard SQL. Snowflake, Postgres dialect" },
-      { name: "MQL (MongoDB Query)", note: "For document-oriented integrations" },
-      { name: "SPARQL", note: "For ontology and knowledge graph integrations" },
-      { name: "Python / TypeScript SDKs", note: "Typed clients, auto-generated from OpenAPI" },
-    ],
-  },
+type CatId = "EDA" | "PLM" | "ERP" | "AI" | "CUSTOM";
+type Tool = { name: string; note: string; cat: CatId };
+
+const TOOLS: Tool[] = [
+  { name: "Altium Designer", note: "Native library sync via REST", cat: "EDA" },
+  { name: "KiCad", note: "Open plugin, community supported", cat: "EDA" },
+  { name: "Cadence OrCAD / Allegro", note: "CIS connector in progress", cat: "EDA" },
+  { name: "Mentor PADS / Xpedition", note: "Library adapter via REST", cat: "EDA" },
+  { name: "Zuken CR-8000", note: "Available via REST API", cat: "EDA" },
+  { name: "DipTrace", note: "Via REST API", cat: "EDA" },
+  { name: "Siemens Teamcenter", note: "Integration via Teamcenter connectors", cat: "PLM" },
+  { name: "Aras Innovator", note: "REST-native, open schema", cat: "PLM" },
+  { name: "PTC Windchill", note: "Standard REST + webhook events", cat: "PLM" },
+  { name: "Dassault ENOVIA / 3DEXPERIENCE", note: "REST connector", cat: "PLM" },
+  { name: "Arena PLM", note: "Native REST API", cat: "PLM" },
+  { name: "Propel PLM", note: "Salesforce-native, REST", cat: "PLM" },
+  { name: "SAP S/4HANA", note: "Material master sync via REST", cat: "ERP" },
+  { name: "Oracle Cloud ERP", note: "Item master connector", cat: "ERP" },
+  { name: "Snowflake", note: "Native SQL. Query Oriv directly", cat: "ERP" },
+  { name: "Databricks", note: "Delta Lake via SQL connector", cat: "ERP" },
+  { name: "BigQuery", note: "REST export on schedule or event", cat: "ERP" },
+  { name: "Redshift", note: "REST export", cat: "ERP" },
+  { name: "Cursor", note: "Oriv MCP server. Native tool calls", cat: "AI" },
+  { name: "Windsurf (Codeium)", note: "MCP server, same interface", cat: "AI" },
+  { name: "Claude Code", note: "MCP server. Zero config", cat: "AI" },
+  { name: "OpenAI Assistants", note: "Function calling via REST bridge", cat: "AI" },
+  { name: "LangChain / LlamaIndex", note: "REST tool, Python SDK", cat: "AI" },
+  { name: "Custom internal agents", note: "MCP or REST. Your choice", cat: "AI" },
+  { name: "REST API", note: "OpenAPI 3.1 spec, versioned", cat: "CUSTOM" },
+  { name: "GraphQL", note: "Typed schema, introspectable", cat: "CUSTOM" },
+  { name: "SQL", note: "Standard SQL. Snowflake, Postgres dialect", cat: "CUSTOM" },
+  { name: "MQL (MongoDB Query)", note: "For document-oriented integrations", cat: "CUSTOM" },
+  { name: "SPARQL", note: "For ontology and knowledge graph integrations", cat: "CUSTOM" },
+  { name: "Python / TypeScript SDKs", note: "Typed clients, auto-generated from OpenAPI", cat: "CUSTOM" },
 ];
 
+type FilterId = CatId | "ALL";
+
+const FILTERS: { id: FilterId; label: string }[] = [
+  { id: "ALL", label: "All" },
+  { id: "EDA", label: "EDA" },
+  { id: "PLM", label: "PLM" },
+  { id: "ERP", label: "ERP" },
+  { id: "AI", label: "AI" },
+  { id: "CUSTOM", label: "Custom" },
+];
+
+const EASE = [0.32, 0.72, 0, 1] as const;
+
 export default function IntegrationGrid() {
-  const [active, setActive] = useState("eda");
-  const cat = categories.find((c) => c.id === active) ?? categories[0];
+  const [filter, setFilter] = useState<FilterId>("ALL");
+
+  const filtered = useMemo(
+    () => (filter === "ALL" ? TOOLS : TOOLS.filter((t) => t.cat === filter)),
+    [filter],
+  );
+
+  const counts = useMemo<Record<FilterId, number>>(() => {
+    const c: Record<FilterId, number> = { ALL: TOOLS.length, EDA: 0, PLM: 0, ERP: 0, AI: 0, CUSTOM: 0 };
+    for (const t of TOOLS) c[t.cat] += 1;
+    return c;
+  }, []);
 
   return (
-    <section className="border-t border-[var(--border-subtle)] bg-[var(--surface)] py-20 md:py-28">
+    <section className="border-t border-[var(--border-subtle)] bg-[var(--surface)] py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <Reveal>
-          <div className="mb-10 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.4fr)] md:gap-16 md:items-end">
-            <h2 className="headline-xl text-[var(--on-surface)]">
-              Integration surface.{" "}
-              <span className="text-[var(--on-surface-variant)]">Five categories.</span>
-            </h2>
-            <p className="body-lg max-w-[600px] text-[var(--on-surface-variant)]">
-              One data layer behind every tool in your stack. Named integrations below;
-              anything with a REST endpoint or SQL interface can connect.
-            </p>
-          </div>
-        </Reveal>
-
-        {/* Category tabs */}
-        <Reveal delay={60}>
-          <div
-            role="tablist"
-            aria-label="Integration categories"
-            className="mb-8 flex flex-wrap gap-2"
-          >
-            {categories.map((c) => (
-              <button
-                key={c.id}
-                role="tab"
-                aria-selected={c.id === active}
-                onClick={() => setActive(c.id)}
-                className={`rounded-md px-3.5 py-2 label-mono text-[10px] tracking-[0.16em] transition-colors duration-150 ${
-                  c.id === active
-                    ? "bg-[var(--on-surface)] text-[var(--surface)]"
-                    : "border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--on-surface-variant)] hover:border-[var(--border-strong)] hover:text-[var(--on-surface)] active:bg-[var(--surface-container)]"
-                }`}
-              >
-                {c.label}
-              </button>
-            ))}
-          </div>
-        </Reveal>
-
-        {/* Active panel */}
-        <Reveal delay={100} key={active}>
-          <div>
-            <p className="mb-6 body-md max-w-[600px] text-[var(--on-surface-variant)]">
-              {cat.description}
-            </p>
-
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {cat.tools.map((tool) => (
-                <div
-                  key={tool.name}
-                  className="rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-4 py-4 transition-colors duration-150 hover:border-[var(--border-strong)]"
-                >
-                  <p className="mb-0.5 text-[13.5px] font-medium text-[var(--on-surface)]">
-                    {tool.name}
-                  </p>
-                  <p className="label-mono text-[10px] tracking-[0.12em] text-[var(--on-surface-variant)]">
-                    {tool.note}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Don't see your tool? */}
-        <Reveal delay={160}>
-          <div className="mt-10 rounded-lg border border-[var(--oriv-yellow)]/25 bg-[var(--oriv-yellow)]/5 px-6 py-5 md:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p className="label-mono mb-1 text-[10px] tracking-[0.18em] text-[#785a00]">
-                  DON&rsquo;T SEE YOUR TOOL?
-                </p>
-                <p className="body-md text-[var(--on-surface-variant)]">
-                  We add integrations based on what design partners actually run.
-                  Tell us your stack and we&rsquo;ll scope it.
-                </p>
-              </div>
-              <a
-                href="mailto:hello@oriv.io?subject=Integration request&body=Tool I need Oriv to connect to:%0A%0AMy stack:%0A%0AUse case:%0A"
-                className="inline-flex shrink-0 items-center gap-2 btn-primary"
-              >
-                <span>Request integration</span>
-                <span className="flex h-6 w-6 items-center justify-center rounded bg-black/10">
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                    <path
-                      d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8"
-                      stroke="currentColor"
-                      strokeWidth="1.4"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+          <div className="mb-14 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,_1.05fr)_minmax(0,_1fr)] md:gap-16 md:items-end">
+            <div>
+              <p className="label-mono mb-3 text-[10px] tracking-[0.22em] text-[var(--outline)]">
+                INTEGRATION INDEX
+              </p>
+              <h2 className="headline-xl text-[var(--on-surface)]">
+                {TOOLS.length} named integrations.{" "}
+                <span className="text-[var(--on-surface-variant)]">
+                  Anything REST or SQL connects.
                 </span>
-              </a>
+              </h2>
             </div>
+            <p className="body-lg max-w-[480px] text-[var(--on-surface-variant)]">
+              The list below is what design partners actually wire — not aspirational
+              logos. Missing a name? Send us your stack and we&rsquo;ll scope it.
+            </p>
           </div>
+        </Reveal>
+
+        <Reveal delay={60}>
+          <div className="mb-3 flex flex-wrap items-baseline gap-x-1 gap-y-2">
+            {FILTERS.map((f) => {
+              const active = f.id === filter;
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  onClick={() => setFilter(f.id)}
+                  className={`group inline-flex items-baseline gap-1.5 rounded-md px-2.5 py-1.5 font-mono text-[11.5px] tracking-tight transition-colors duration-200 ${
+                    active
+                      ? "bg-[var(--oriv-yellow)] text-[var(--on-oriv-yellow)]"
+                      : "text-[var(--on-surface-variant)] hover:bg-[var(--surface-container-low)] hover:text-[var(--on-surface)]"
+                  }`}
+                  aria-pressed={active}
+                >
+                  <span>{f.label}</span>
+                  <span className={active ? "opacity-70" : "opacity-45"}>
+                    {counts[f.id]}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </Reveal>
+
+        <Reveal delay={120}>
+          <ul className="border-t border-[var(--border-subtle)]">
+            <AnimatePresence mode="popLayout" initial={false}>
+              {filtered.map((t, i) => (
+                <motion.li
+                  key={t.name}
+                  layout
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.22, ease: EASE, layout: { duration: 0.32, ease: EASE } }}
+                  className="group relative border-b border-[var(--border-subtle)]"
+                >
+                  <div className="grid grid-cols-[2.75rem_minmax(0,_1fr)_4rem] items-baseline gap-3 px-1 py-4 transition-colors duration-200 group-hover:bg-[var(--surface-container-low)] md:grid-cols-[3.5rem_minmax(0,_1.1fr)_minmax(0,_1.5fr)_5rem] md:gap-6 md:px-3">
+                    <span className="font-mono text-[11px] tracking-[0.05em] text-[var(--outline)]">
+                      {String(i + 1).padStart(3, "0")}
+                    </span>
+                    <span className="text-[15.5px] font-medium tracking-tight text-[var(--on-surface)]">
+                      {t.name}
+                    </span>
+                    <span className="hidden font-mono text-[12px] leading-snug text-[var(--on-surface-variant)] md:block">
+                      {t.note}
+                    </span>
+                    <span className="label-mono text-right text-[10px] tracking-[0.2em] text-[var(--outline)] transition-colors duration-200 group-hover:text-[var(--on-surface-variant)]">
+                      {t.cat}
+                    </span>
+                  </div>
+                  <p className="ml-[2.75rem] -mt-1 mb-3 pr-1 font-mono text-[11.5px] leading-snug text-[var(--on-surface-variant)] md:hidden">
+                    {t.note}
+                  </p>
+                </motion.li>
+              ))}
+            </AnimatePresence>
+          </ul>
+        </Reveal>
+
+        <Reveal delay={200}>
+          <p className="mt-12 max-w-[640px] text-[15px] leading-relaxed text-[var(--on-surface-variant)]">
+            Missing a name?{" "}
+            <a
+              href="mailto:hello@oriv.io?subject=Integration request&body=Tool I need Oriv to connect to:%0A%0AMy stack:%0A%0AUse case:%0A"
+              className="text-[var(--on-surface)] underline decoration-[var(--oriv-yellow)] decoration-2 underline-offset-[5px] transition-colors hover:text-[var(--oriv-yellow)]"
+            >
+              Tell us what your team runs
+            </a>{" "}
+            and we&rsquo;ll add it to the index.
+          </p>
         </Reveal>
       </div>
     </section>
