@@ -30,10 +30,7 @@ export default function BuiltOnPage() {
         />
         <IntegrationGrid />
         <UseCases />
-        <PageCTA
-          title="Don't see your tool?"
-          body="Tell us what you're building on. We add integrations based on what design partners actually run. Email hello@oriv.io with your stack."
-        />
+        <PageCTA />
       </main>
       <Footer />
     </>

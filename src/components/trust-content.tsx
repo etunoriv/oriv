@@ -29,56 +29,74 @@ const threatModel = [
   },
 ];
 
-const commitments = [
+type CommitmentStatus = "shipped" | "in-progress";
+
+type Commitment = {
+  name: string;
+  note: string;
+  status: CommitmentStatus;
+  badge: string; // "SHIPPED" or target quarter
+};
+
+const commitments: Commitment[] = [
   {
-    label: "Available now",
-    color: "emerald" as const,
-    items: [
-      {
-        name: "Tenant isolation",
-        note: "Your private SCDs, MIL-PRF specs, and supplier quals are stored, processed, and queried in your tenant only. They never inform another tenant's results.",
-      },
-      {
-        name: "Per-field provenance",
-        note: "Every canonical record cites the source page, table, and extraction run. Queryable audit trail for ISO 26262 ASIL evidence, FDA 21 CFR Part 11, and DMSMS workflows.",
-      },
-      {
-        name: "ITAR-ready deployment",
-        note: "AWS GovCloud and Azure Government available. US-persons-only processing path. No data transits non-compliant regions.",
-      },
-      {
-        name: "On-prem & private cloud",
-        note: "Full deployment inside your VPC, dedicated tenancy, or air-gapped environment. We ship the stack; you own the runtime.",
-      },
-      {
-        name: "ISO 26262 traceability",
-        note: "ASIL evidence chains, per-field provenance, and change history available for automotive functional safety workflows.",
-      },
-      {
-        name: "FDA 21 CFR Part 11",
-        note: "Electronic records with audit trail. Medical device design history file (DHF) workflows supported.",
-      },
-    ],
+    name: "Tenant isolation",
+    note: "Your private SCDs, MIL-PRF specs, and supplier quals are stored, processed, and queried in your tenant only. They never inform another tenant's results.",
+    status: "shipped",
+    badge: "SHIPPED",
   },
   {
-    label: "In progress",
-    color: "yellow" as const,
-    items: [
-      {
-        name: "FedRAMP Moderate authorization",
-        note: "Authorization process underway. IL5 scoped for DoD prime contractors.",
-      },
-      {
-        name: "SOC 2 Type II",
-        note: "Audit in progress. Report available to design partners under NDA.",
-      },
-      {
-        name: "IEC 62443 industrial cyber",
-        note: "Industrial control system security controls being mapped to Oriv's deployment model.",
-      },
-    ],
+    name: "Per-field provenance",
+    note: "Every canonical record cites the source page, table, and extraction run. Queryable audit trail for ISO 26262 ASIL evidence, FDA 21 CFR Part 11, and DMSMS workflows.",
+    status: "shipped",
+    badge: "SHIPPED",
+  },
+  {
+    name: "ITAR-ready deployment",
+    note: "AWS GovCloud and Azure Government available. US-persons-only processing path. No data transits non-compliant regions.",
+    status: "shipped",
+    badge: "SHIPPED",
+  },
+  {
+    name: "On-prem & private cloud",
+    note: "Full deployment inside your VPC, dedicated tenancy, or air-gapped environment. We ship the stack; you own the runtime.",
+    status: "shipped",
+    badge: "SHIPPED",
+  },
+  {
+    name: "ISO 26262 traceability",
+    note: "ASIL evidence chains, per-field provenance, and change history available for automotive functional safety workflows.",
+    status: "shipped",
+    badge: "SHIPPED",
+  },
+  {
+    name: "FDA 21 CFR Part 11",
+    note: "Electronic records with audit trail. Medical device design history file (DHF) workflows supported.",
+    status: "shipped",
+    badge: "SHIPPED",
+  },
+  {
+    name: "FedRAMP Moderate authorization",
+    note: "Authorization process underway. IL5 scoped for DoD prime contractors.",
+    status: "in-progress",
+    badge: "Q4 2026",
+  },
+  {
+    name: "SOC 2 Type II",
+    note: "Audit in progress. Report available to design partners under NDA.",
+    status: "in-progress",
+    badge: "Q2 2026",
+  },
+  {
+    name: "IEC 62443 industrial cyber",
+    note: "Industrial control system security controls being mapped to Oriv's deployment model.",
+    status: "in-progress",
+    badge: "Q1 2027",
   },
 ];
+
+const shippedCount = commitments.filter((c) => c.status === "shipped").length;
+const inProgressIndex = commitments.findIndex((c) => c.status === "in-progress");
 
 const deploymentOptions = [
   {
@@ -156,43 +174,67 @@ export default function TrustContent() {
             </div>
           </Reveal>
 
-          <div className="space-y-12">
-            {commitments.map((bucket) => (
-              <Reveal key={bucket.label} delay={80}>
-                <div>
-                  <div className="mb-5 flex items-center gap-3">
-                    <span
-                      className={`inline-block h-2 w-2 ${
-                        bucket.color === "emerald"
-                          ? "bg-[#7CDC9E]"
-                          : "bg-[var(--oriv-yellow)]"
-                      }`}
-                      aria-hidden
-                    />
-                    <p className="label-mono text-[10px] tracking-[0.2em] text-[var(--on-surface)]">
-                      {bucket.label.toUpperCase()}
+          <Reveal delay={80}>
+            <ul className="border-t border-[var(--border-subtle)]">
+              {commitments.map((c, i) => (
+                <li key={c.name} className="relative">
+                  {/* Group separator between SHIPPED and IN-PROGRESS — a
+                      mono caption, not another bucket card */}
+                  {i === inProgressIndex && (
+                    <div className="flex items-center gap-3 border-b border-[var(--border-subtle)] py-5">
+                      <span
+                        aria-hidden
+                        className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--oriv-yellow)]"
+                      />
+                      <p className="label-mono text-[10px] tracking-[0.22em] text-[var(--outline)]">
+                        IN PROGRESS · {commitments.length - shippedCount} OF {commitments.length}
+                      </p>
+                    </div>
+                  )}
+                  <div className="group grid grid-cols-[2.5rem_1fr_5rem] items-baseline gap-3 border-b border-[var(--border-subtle)] py-6 transition-colors duration-200 hover:bg-[var(--surface-container-low)] md:grid-cols-[3.5rem_minmax(0,_1.05fr)_minmax(0,_1.6fr)_6rem] md:gap-8 md:py-7">
+                    <span className="font-mono text-[11px] tracking-[0.05em] text-[var(--outline)]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-[var(--on-surface)] md:text-[17px]">
+                      {c.name}
+                    </h3>
+                    <p className="hidden text-[13.5px] leading-[1.55] text-[var(--on-surface-variant)] md:block">
+                      {c.note}
                     </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 border-l border-t border-[var(--border-subtle)] sm:grid-cols-2 lg:grid-cols-3">
-                    {bucket.items.map((item) => (
-                      <div
-                        key={item.name}
-                        className="border-b border-r border-[var(--border-subtle)] px-8 py-8 md:px-10 md:py-10"
+                    <div className="flex items-center justify-end gap-2">
+                      <span
+                        aria-hidden
+                        className={`inline-block h-1.5 w-1.5 rounded-full ${
+                          c.status === "shipped"
+                            ? "bg-[#7CDC9E]"
+                            : "bg-[var(--oriv-yellow)]"
+                        }`}
+                      />
+                      <span
+                        className={`label-mono text-[9.5px] tracking-[0.18em] ${
+                          c.status === "shipped"
+                            ? "text-[#7CDC9E]"
+                            : "text-[var(--oriv-yellow)]"
+                        }`}
                       >
-                        <p className="mb-2.5 text-[15px] font-semibold tracking-[-0.01em] text-[var(--on-surface)]">
-                          {item.name}
-                        </p>
-                        <p className="text-[13.5px] leading-[1.55] text-[var(--on-surface-variant)]">
-                          {item.note}
-                        </p>
-                      </div>
-                    ))}
+                        {c.badge}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+                  {/* Mobile note row — note breaks below name on narrow widths */}
+                  <p className="-mt-3 ml-[2.5rem] mb-6 pr-1 text-[13px] leading-[1.55] text-[var(--on-surface-variant)] md:hidden">
+                    {c.note}
+                  </p>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-5 label-mono text-[10px] tracking-[0.22em] text-[var(--outline)]">
+              SHIPPED · {shippedCount} OF {commitments.length}
+              <span className="mx-3 text-[var(--border-subtle)]">·</span>
+              IN PROGRESS · {commitments.length - shippedCount} OF {commitments.length}
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -212,43 +254,26 @@ export default function TrustContent() {
             </div>
           </Reveal>
 
-          <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2" step={0.08} delayChildren={0.05}>
+          <Stagger className="border-t border-[var(--border-subtle)]" step={0.08} delayChildren={0.05}>
             {deploymentOptions.map((opt) => (
               <Item key={opt.name}>
-                <div className="flex items-start gap-4 rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-5">
-                  <span
-                    aria-hidden
-                    className="mt-1 shrink-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#7CDC9E]/15"
-                  >
-                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                      <path d="M1 4L3.5 6.5L9 1" stroke="#7CDC9E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <div>
-                    <p className="mb-1 text-[14px] font-semibold tracking-[-0.01em] text-[var(--on-surface)]">
-                      {opt.name}
-                    </p>
-                    <p className="body-md text-[var(--on-surface-variant)]">{opt.note}</p>
-                  </div>
+                <div className="grid grid-cols-1 items-baseline gap-4 border-b border-[var(--border-subtle)] py-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.4fr)] md:gap-12">
+                  <h3 className="headline-sm text-[var(--on-surface)]">{opt.name}</h3>
+                  <p className="body-md text-[var(--on-surface-variant)]">{opt.note}</p>
                 </div>
               </Item>
             ))}
           </Stagger>
 
-          {/* Provenance guarantee */}
+          {/* Residency guarantee — plain editorial paragraph, no banner */}
           <Reveal delay={200}>
-            <div className="mt-12 rounded-lg border border-[var(--oriv-yellow)]/25 bg-[var(--oriv-yellow)]/5 px-6 py-6 md:px-8">
-              <p className="label-mono mb-3 text-[10px] tracking-[0.2em] text-[#785a00]">
-                DATA RESIDENCY GUARANTEE
-              </p>
-              <p className="body-md max-w-[700px] text-[var(--on-surface-variant)]">
-                Your private component data, SCDs, MIL-PRF specs, supplier quals,
-                approved vendor lists, never leaves your chosen deployment boundary.
-                In VPC and on-prem modes, it never leaves your infrastructure. In
-                Oriv Cloud, it never leaves your tenant. A written obligation in
-                every design partner contract.
-              </p>
-            </div>
+            <p className="mt-10 max-w-[720px] body-md text-[var(--on-surface-variant)]">
+              Your private component data &mdash; SCDs, MIL-PRF specs, supplier
+              quals, approved vendor lists &mdash; never leaves your chosen
+              deployment boundary. In VPC and on-prem modes, it never leaves your
+              infrastructure. In Oriv Cloud, it never leaves your tenant. Written
+              into every design partner contract.
+            </p>
           </Reveal>
         </div>
       </section>

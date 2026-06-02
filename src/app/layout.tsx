@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Hanken_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Geist, Hanken_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { BookerProvider } from "@/components/booker";
 import "./globals.css";
 
@@ -18,6 +18,12 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
   weight: ["400", "500"],
+});
+
+const geist = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 const SITE_URL = "https://oriv.io";
@@ -65,7 +71,7 @@ export default function RootLayout({
       lang="en-US"
       data-theme="dark"
       style={{ colorScheme: "dark" }}
-      className={`${hanken.variable} ${inter.variable} ${jetbrains.variable}`}
+      className={`${hanken.variable} ${inter.variable} ${jetbrains.variable} ${geist.variable}`}
     >
       <head>
         {/* Cal.com element-click embed (orivstudio/demo) */}

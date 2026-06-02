@@ -31,17 +31,6 @@ const founders = [
   },
 ];
 
-const investors = [
-  { name: "To be announced", note: "Pre-seed round" },
-];
-
-const advisors = [
-  {
-    name: "Advisory network",
-    note: "Domain advisors from A&D, automotive, MedTech, and semiconductor. Named on signing.",
-  },
-];
-
 const values = [
   {
     label: "Canonical over convenient",
@@ -173,59 +162,6 @@ export default function AboutContent() {
               </Item>
             ))}
           </Stagger>
-        </div>
-      </section>
-
-      {/* Investors + Advisors */}
-      <section className="border-t border-[var(--border-subtle)] bg-[var(--surface)] py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
-            {/* Investors */}
-            <Reveal>
-              <div>
-                <h2 className="headline-lg mb-8 text-[var(--on-surface)]">Backed by</h2>
-                <div className="space-y-4">
-                  {investors.map((inv) => (
-                    <div
-                      key={inv.name}
-                      className="rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-5 py-4"
-                    >
-                      <p className="text-[14px] font-medium text-[var(--on-surface)]">{inv.name}</p>
-                      <p className="label-mono mt-1 text-[9.5px] tracking-[0.16em] text-[var(--outline)]">
-                        {inv.note}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-5 label-mono text-[10px] tracking-[0.14em] text-[var(--outline)]">
-                  Investor announcements follow fundraise close.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* Advisors */}
-            <Reveal delay={120}>
-              <div>
-                <h2 className="headline-lg mb-8 text-[var(--on-surface)]">Advisors</h2>
-                <div className="space-y-4">
-                  {advisors.map((a) => (
-                    <div
-                      key={a.name}
-                      className="rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-5 py-4"
-                    >
-                      <p className="text-[14px] font-medium text-[var(--on-surface)]">{a.name}</p>
-                      <p className="label-mono mt-1 text-[9.5px] tracking-[0.16em] text-[var(--outline)]">
-                        {a.note}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-5 label-mono text-[10px] tracking-[0.14em] text-[var(--outline)]">
-                  Advisors named when NDAs and advisor agreements are signed.
-                </p>
-              </div>
-            </Reveal>
-          </div>
         </div>
       </section>
 
