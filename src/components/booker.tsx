@@ -462,7 +462,13 @@ function BookerDialog() {
             }}
             drag={isMobile ? "y" : false}
             dragConstraints={{ top: 0, bottom: 0 }}
-            dragElastic={{ top: 0, bottom: 0.4 }}
+            dragElastic={{ top: 0, bottom: 0.5 }}
+            dragTransition={{
+              bounceStiffness: 380,
+              bounceDamping: 32,
+              power: 0.18,
+              timeConstant: 200,
+            }}
             onDragEnd={(_, info) => {
               if (info.offset.y > 120 || info.velocity.y > 600) setOpen(false);
             }}

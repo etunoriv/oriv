@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Reveal, Stagger, Item } from "@/lib/motion";
+import { Reveal } from "@/lib/motion";
 
 const cases = [
   {
@@ -60,7 +60,7 @@ export default function UseCases() {
 
   return (
     <section
-      id="built-on"
+      id="industries"
       className="relative border-t border-[var(--border-subtle)] bg-[var(--surface)] py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10">
@@ -81,27 +81,27 @@ export default function UseCases() {
         </Reveal>
 
         <Reveal delay={80}>
-          <Stagger
-            className="mb-10 grid grid-cols-2 gap-px overflow-hidden rounded-md border border-[var(--border-subtle)] bg-[var(--border-subtle)] sm:grid-cols-3 md:grid-cols-6"
-            step={0.04}
+          <div
+            role="tablist"
+            aria-label="Use cases by industry"
+            className="mb-10 flex flex-wrap gap-2 border-b border-[var(--border-subtle)] pb-6"
           >
             {cases.map((cc, i) => (
-              <Item key={cc.industry}>
-                <button
-                  role="tab"
-                  aria-selected={i === active}
-                  onClick={() => setActive(i)}
-                  className={`flex h-full w-full items-center px-4 py-3.5 text-left text-[12.5px] font-medium transition-colors duration-150 ${
-                    i === active
-                      ? "bg-[var(--on-surface)] text-[var(--surface-elevated)]"
-                      : "bg-[var(--surface)] text-[var(--on-surface-variant)] hover:bg-[var(--surface-container-low)] hover:text-[var(--on-surface)] active:bg-[var(--surface-container)]"
-                  }`}
-                >
-                  {cc.industry}
-                </button>
-              </Item>
+              <button
+                key={cc.industry}
+                role="tab"
+                aria-selected={i === active}
+                onClick={() => setActive(i)}
+                className={`inline-flex items-center rounded-full border px-4 py-2 text-[12.5px] font-medium tracking-[-0.005em] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--oriv-yellow)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] ${
+                  i === active
+                    ? "border-[var(--on-surface)] bg-[var(--on-surface)] text-[var(--surface-elevated)]"
+                    : "border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--on-surface-variant)] hover:border-[var(--on-surface-variant)] hover:text-[var(--on-surface)]"
+                }`}
+              >
+                {cc.industry}
+              </button>
             ))}
-          </Stagger>
+          </div>
         </Reveal>
 
         {/* Active panel — headline-left / body-right */}

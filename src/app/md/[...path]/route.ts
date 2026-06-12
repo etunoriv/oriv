@@ -44,26 +44,23 @@ Oriv is the parametric data layer for hardware engineering. Component data from 
 `,
     },
     {
-      pattern: "/how",
-      render: () => `# How it works
+      pattern: "/industries",
+      render: () => `# Industries
 
-Oriv sits between datasheets and the rest of your hardware stack. Component parameters are extracted into one canonical schema, then exposed through an API every tool can query.
+How aerospace, automotive, MedTech, robotics, and semiconductor teams use Oriv as the data layer beneath their internal tools. Integration grid covers EDA, PLM, ERP, AI, and custom apps.
 
-## The flow
-
-1. Upload or sync datasheets.
-2. Oriv builds a canonical, parametric record for each component.
-3. EDA tools, simulators, AI agents, and internal apps query the same source.
-4. Updates propagate everywhere instead of getting retyped.
+Hardware teams use Oriv as the canonical component database behind AI copilots, internal review tools, supply-chain visibility dashboards, and compliance pipelines.
 `,
     },
     {
-      pattern: "/built-on",
-      render: () => `# Built on Oriv
+      pattern: "/customers",
+      render: () => `# Customers
 
-Tools and workflows that run on top of the Oriv parametric data layer.
+Oriv is in the design-partner phase. We're building the canonical data layer with three teams whose component categories shape the schema for everyone who comes after.
 
-Hardware teams use Oriv as the canonical component database behind AI copilots, internal review tools, supply-chain visibility dashboards, and compliance pipelines.
+Logos and named case studies land on this page when each partner is cleared to be public. Current cohort: A&D DMSMS office, semiconductor R&D team, avionics test integrator.
+
+Three spots open in the Q3 cohort. Contact: hello@oriv.io
 `,
     },
     {

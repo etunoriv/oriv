@@ -471,9 +471,16 @@ select.input-line option {
 .drift { animation: drift 9s ease-in-out infinite; }
 
 :focus-visible {
-  outline: 1px solid var(--oriv-yellow);
+  outline: 2px solid var(--oriv-yellow);
   outline-offset: 3px;
   border-radius: 4px;
+}
+/* Buttons / links that already carry their own bg get a tight ring instead */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible {
+  outline-offset: 2px;
 }
 
 ::selection {

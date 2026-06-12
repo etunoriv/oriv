@@ -94,29 +94,31 @@ export default function AboutContent() {
           <Reveal>
             <h2 className="headline-lg mb-10 text-[var(--on-surface)]">Co-founders</h2>
           </Reveal>
-          <Stagger className="grid grid-cols-1 gap-6 md:grid-cols-3" step={0.1} delayChildren={0.05}>
+          <Stagger className="border-t border-[var(--border-subtle)]" step={0.1} delayChildren={0.05}>
             {founders.map((f) => (
               <Item key={f.name}>
-                <div className="flex h-full flex-col rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-6">
-                  <div className="mb-5 flex items-start justify-between">
-                    <div
-                      aria-hidden
-                      className="flex h-12 w-12 items-center justify-center rounded-md border border-[var(--border-subtle)] bg-[var(--surface-container)] font-mono text-[13px] font-medium tracking-wider text-[var(--on-surface-variant)]"
-                    >
-                      {f.initials}
-                    </div>
-                    <span className="label-mono mt-1.5 text-[9.5px] tracking-[0.16em] text-[var(--outline)]">
-                      {f.location}
-                    </span>
+                <article className="grid grid-cols-[80px_minmax(0,_1fr)] items-start gap-5 border-b border-[var(--border-subtle)] py-8 md:grid-cols-[80px_minmax(0,_0.9fr)_minmax(0,_1.6fr)] md:gap-10 md:py-10">
+                  <div
+                    aria-hidden
+                    className="flex h-16 w-16 items-center justify-center rounded-md border border-[var(--border-subtle)] bg-[var(--surface-container)] font-mono text-[18px] font-medium tracking-wider text-[var(--on-surface-variant)] md:h-20 md:w-20 md:text-[22px]"
+                  >
+                    {f.initials}
                   </div>
-                  <p className="mb-0.5 text-[15px] font-semibold tracking-[-0.01em] text-[var(--on-surface)]">
-                    {f.name}
+                  <div className="md:pt-1">
+                    <p className="text-[17px] font-semibold tracking-[-0.01em] text-[var(--on-surface)] md:text-[18px]">
+                      {f.name}
+                    </p>
+                    <p className="label-mono mt-1 text-[10px] tracking-[0.16em] text-[var(--outline)]">
+                      {f.role}
+                    </p>
+                    <p className="label-mono mt-1 text-[10px] tracking-[0.16em] text-[var(--outline)]">
+                      {f.location}
+                    </p>
+                  </div>
+                  <p className="col-span-2 body-md text-[var(--on-surface-variant)] md:col-span-1 md:pt-1">
+                    {f.bio}
                   </p>
-                  <p className="label-mono mb-4 text-[9.5px] tracking-[0.16em] text-[var(--outline)]">
-                    {f.role}
-                  </p>
-                  <p className="body-md text-[var(--on-surface-variant)]">{f.bio}</p>
-                </div>
+                </article>
               </Item>
             ))}
           </Stagger>

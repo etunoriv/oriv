@@ -9,7 +9,8 @@ import { useBooker } from "@/components/booker";
 
 const links = [
   { label: "Product", href: "/product" },
-  { label: "Built on", href: "/built-on" },
+  { label: "Industries", href: "/industries" },
+  { label: "Customers", href: "/customers" },
   { label: "Trust", href: "/trust" },
   { label: "About", href: "/about" },
 ];
@@ -106,7 +107,13 @@ export default function Navbar() {
               button drops into its final slot, then clip-path animates from
               a center seam outward, unfurling left and right simultaneously.
               On hide the clip-path closes first, then the slot collapses. */}
-          <div className="hidden items-center md:flex">
+          <div className="hidden items-center gap-3 md:flex">
+            <Link
+              href="https://app.oriv.io"
+              className="text-[13px] font-medium text-[var(--on-surface-variant)] transition-colors duration-200 hover:text-[var(--on-surface)]"
+            >
+              Log in
+            </Link>
             <motion.div
               initial={false}
               animate={ctaVisible ? "visible" : "hidden"}

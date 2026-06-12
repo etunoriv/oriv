@@ -7,12 +7,12 @@ import UseCases from "@/components/use-cases";
 import PageCTA from "@/components/page-cta";
 
 export const metadata: Metadata = {
-  title: "Built on Oriv · Integrations & Industry Patterns",
+  title: "Industries · Oriv",
   description:
     "How aerospace, automotive, MedTech, robotics, and semiconductor teams use Oriv as the data layer beneath their internal tools. Integration grid: EDA, PLM, ERP, AI, custom.",
 };
 
-export default function BuiltOnPage() {
+export default function IndustriesPage() {
   return (
     <>
       <Navbar />

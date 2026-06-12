@@ -190,7 +190,7 @@ function PartRow({
           className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[9px] font-medium"
           style={{ background: "rgba(255,197,46,0.12)", color: "#FFC52E" }}
         >
-          <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
             <path
               d="M1.5 4L3.25 5.75L6.5 2.5"
               stroke="currentColor"

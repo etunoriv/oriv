@@ -73,15 +73,6 @@ export default function Pivot() {
       id="pivot"
       className="relative overflow-hidden border-t border-[var(--border-subtle)] bg-[var(--surface)] py-24 md:py-32"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 50% 45% at 92% 8%, rgba(255,197,46,0.10), transparent 64%)",
-        }}
-      />
-
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <Reveal>
           <div className="mb-14 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.2fr)] md:gap-16 md:items-end">

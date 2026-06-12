@@ -37,7 +37,10 @@ export default function Hero() {
             transition={{ duration: 1.05, ease, delay: 0.06 }}
             className="font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-[var(--on-surface)]"
           >
-            The parametric data layer for hardware engineering.
+            20 years of component databases.{" "}
+            <span className="text-[var(--on-surface-variant)]">
+              Zero that AI can actually use.
+            </span>
           </motion.h1>
         </div>
 
@@ -50,8 +53,10 @@ export default function Hero() {
           className="mt-8 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between md:gap-12"
         >
           <p className="max-w-[600px] body-lg text-[var(--on-surface-variant)]">
-            Component data lives in 40-page PDFs, duplicated across every tool. Oriv
-            unifies it into one canonical schema your stack already queries.
+            Oriv is the first knowledge layer hardware engineering built for
+            agents. Component specs, design decisions, and the engineer&rsquo;s
+            reasoning &mdash; captured during R&amp;D, queryable as structured
+            data.
           </p>
 
           <button
@@ -60,8 +65,8 @@ export default function Hero() {
             className="mag group inline-flex shrink-0 items-center gap-2 btn-primary"
           >
             <span>Talk to a co-founder</span>
-            <span className="arrow flex h-6 w-6 items-center justify-center rounded bg-black/10">
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+            <span className="arrow flex h-6 w-6 items-center justify-center rounded bg-black/10" aria-hidden>
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path
                   d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8"
                   stroke="currentColor"
