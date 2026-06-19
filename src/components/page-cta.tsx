@@ -9,8 +9,8 @@ import { useBooker } from "@/components/booker";
  * every sub-page reads as prose rather than a templated CTA banner.
  */
 export default function PageCTA({
-  title = "Want to shape this with us?",
-  body = "We're picking three design partners for Q3. One per vertical. Co-founders answer same week.",
+  title = "Want to shape the layer with us?",
+  body = "We're picking three design partners for Q3 2026. One per vertical. Co-founders answer same week.",
 }: {
   title?: string;
   body?: string;

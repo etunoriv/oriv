@@ -21,16 +21,16 @@ export default function Wedge() {
         <Reveal>
           <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.4fr)] md:gap-16 md:items-end">
             <h2 className="headline-xl text-[var(--on-surface)]">
-              Public corpus plus your long tail.{" "}
+              Public corpus and the private tail.{" "}
               <span className="text-[var(--on-surface-variant)]">
-                One schema.
+                One layer holds both.
               </span>
             </h2>
             <p className="body-lg max-w-[620px] text-[var(--on-surface-variant)]">
-              Existing databases index public datasheets only. The regulated,
-              certified, custom-spec part of your BOM is the part your engineers
-              actually fight with. Oriv ships both layers in one queryable schema.
-              Your data never leaves your tenant.
+              The layer holds the public corpus (vendor datasheets, supplier
+              specs) and the private tail (SCDs, MIL-PRF specs, qualification
+              records, AVL) under one schema. Same query language. Private data
+              stays in the tenant.
             </p>
           </div>
         </Reveal>
@@ -45,7 +45,7 @@ export default function Wedge() {
             <ArtifactCard
               num="01"
               kicker="Source Control Drawings & MIL-PRF"
-              description="Internal SCDs and MIL-PRF specs live in PDFs nobody indexes. The parametric data is locked inside the document, not queryable as fields."
+              description="SCDs and MIL-PRF specs become queryable records once the layer has ingested them. The parametric data that used to be trapped inside each document is finally available as fields."
             >
               <SCDArtifact />
             </ArtifactCard>
@@ -54,7 +54,7 @@ export default function Wedge() {
             <ArtifactCard
               num="02"
               kicker="Supplier qualifications & AVL"
-              description="Approved vendor lists live in spreadsheets passed between procurement and engineering. Qualification history, not parametric data your stack can query."
+              description="Approved vendor lists turn into structured records the moment they enter the layer. Qualification history runs as parametric data the stack can query, instead of getting handed off in spreadsheets between procurement and engineering."
             >
               <AVLArtifact />
             </ArtifactCard>
@@ -63,7 +63,7 @@ export default function Wedge() {
             <ArtifactCard
               num="03"
               kicker="Lifecycle & derate"
-              description="PCN announcements come over email. Derate curves hide in datasheet appendices. None of it queryable as data your tools can act on."
+              description="PCN announcements arrive as events, and derate curves become queryable surfaces. The layer captures what usually hides in datasheet appendices and email threads, and brings it into the same schema as everything else."
             >
               <DerateArtifact />
             </ArtifactCard>

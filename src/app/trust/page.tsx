@@ -8,7 +8,7 @@ import PageCTA from "@/components/page-cta";
 export const metadata: Metadata = {
   title: "Trust & Compliance · Oriv",
   description:
-    "Oriv's security and compliance posture: tenant isolation by default, ITAR-ready deployment, on-prem available. Per-field provenance for ISO 26262, FDA, and DMSMS workflows.",
+    "Oriv's trust posture: tenant isolation by default, ITAR-ready deployment, on-prem available. Per-field provenance built for ISO 26262, FDA, and DMSMS workflows.",
 };
 
 export default function TrustPage() {

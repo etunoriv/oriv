@@ -6,7 +6,7 @@ import AboutContent from "@/components/about-content";
 export const metadata: Metadata = {
   title: "About · Oriv",
   description:
-    "Oriv is the parametric data layer for hardware engineering. Built by Karthik Shenoy, Nitin Bhasin, and Konstantin Klein. San Francisco.",
+    "Oriv is the knowledge layer for engineering teams. Built by Karthik Shenoy, Nitin Bhasin, and Konstantin Klein. San Francisco.",
 };
 
 export default function AboutPage() {

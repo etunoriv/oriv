@@ -28,15 +28,15 @@ export default function FinalCTA() {
 
         <Reveal delay={100}>
           <p className="mt-6 max-w-[640px] text-[16.5px] leading-[1.7] text-[var(--on-surface-variant)] md:text-[17px]">
-            If your team is rebuilding component data, we&rsquo;re who you want
-            in the room. Or email{" "}
+            Design partnership: schema co-designed with your team, private data
+            isolated to your tenant, pricing locked through GA. Email{" "}
             <a
               href="mailto:hello@oriv.io"
               className="text-[var(--on-surface)] underline decoration-dotted decoration-[var(--outline)] underline-offset-[5px] transition-colors duration-200 hover:text-[var(--oriv-yellow)] hover:decoration-[var(--oriv-yellow)]"
             >
               hello@oriv.io
             </a>{" "}
-            directly &mdash; we read every line.
+            &mdash; every line is read.
           </p>
         </Reveal>
 

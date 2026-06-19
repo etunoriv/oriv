@@ -37,9 +37,9 @@ export default function Hero() {
             transition={{ duration: 1.05, ease, delay: 0.06 }}
             className="font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-[var(--on-surface)]"
           >
-            20 years of component databases.{" "}
+            The knowledge layer{" "}
             <span className="text-[var(--on-surface-variant)]">
-              Zero that AI can actually use.
+              for engineering teams.
             </span>
           </motion.h1>
         </div>
@@ -53,10 +53,9 @@ export default function Hero() {
           className="mt-8 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between md:gap-12"
         >
           <p className="max-w-[600px] body-lg text-[var(--on-surface-variant)]">
-            Oriv is the first knowledge layer hardware engineering built for
-            agents. Component specs, design decisions, and the engineer&rsquo;s
-            reasoning &mdash; captured during R&amp;D, queryable as structured
-            data.
+            Captures the reasoning behind every engineering decision your team
+            has made, with each one cited back to its source and held in your
+            tenant. Queryable from any tool you already use.
           </p>
 
           <button

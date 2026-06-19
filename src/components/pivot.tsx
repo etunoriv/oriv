@@ -77,14 +77,14 @@ export default function Pivot() {
         <Reveal>
           <div className="mb-14 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.2fr)] md:gap-16 md:items-end">
             <h2 className="headline-xl text-[var(--on-surface)]">
-              Parametric data,{" "}
+              Four properties of the layer.{" "}
               <span className="text-[var(--on-surface-variant)]">
-                the way engineers actually need it.
+                All by contract.
               </span>
             </h2>
             <p className="body-lg max-w-[560px] text-[var(--on-surface-variant)]">
-              A real parametric store. Four guarantees below. Queryable through
-              SQL, MQL, or SPARQL. Tenant-isolated by default.
+              Real parametric data, written guarantees at every level. Queryable
+              through SQL, MQL, or SPARQL. Tenant-isolated by default.
             </p>
           </div>
         </Reveal>

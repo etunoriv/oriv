@@ -3,54 +3,54 @@
 import { useState } from "react";
 import { Reveal } from "@/lib/motion";
 
+/**
+ * Capability surfaces — what the knowledge layer enables for engineering
+ * teams, organized by capability (not by industry). Industries appear beneath
+ * each capability as examples of where the pattern shows up.
+ */
+
 const cases = [
   {
-    industry: "DMSMS · A&D",
-    title: "An alternates-finder for forty years of SCDs.",
-    body: "Pattern from A&D conversations. Today's DMSMS investigation runs 4 to 6 weeks per part. With Oriv as the data layer, the same investigation runs in a day. The team keeps their existing tooling. Oriv ships the data underneath.",
-    metric: "6 weeks → 1 day per investigation",
-    forRole: "DMSMS Office",
-    replaces: "Excel + handed-down knowledge",
+    capability: "Decision recall",
+    title: "Every past decision, ready when the next one looks the same.",
+    body: "The layer surfaces the last decision the moment the next one looks like it. The reasoning, the engineer who made it, the conditions it held under — all queryable from any tool in the stack.",
+    metric: "DMSMS investigation: 6 weeks → 1 day",
+    industries: ["A&D · DMSMS", "Automotive · sourcing", "Semiconductor · qual"],
   },
   {
-    industry: "Hardware R&D",
-    title: "An AI design copilot with real component data.",
-    body: "Pattern from hardware R&D conversations. Engineers spend a day per component triaging datasheets. With Oriv connected to their AI agent, asking for an alternate to IRF7314 with lower RDS(on) returns cited candidates in seconds. Pin compatibility checked against the qualified-supplier list.",
+    capability: "AI grounding",
+    title: "AI agents that reason like the senior engineer in your team.",
+    body: "The same LLM your team already uses gets the layer underneath it. Now when it suggests an alternate component, it cites the SCD, the bench measurement, and the prior project where the trade-off was already settled.",
     metric: "200 candidates → 8 cited alternates in 90s",
-    forRole: "Hardware R&D",
-    replaces: "Manual datasheet triage",
+    industries: ["Hardware R&D", "MedTech · component selection", "Energy · sourcing"],
   },
   {
-    industry: "Avionics Test",
-    title: "Test benches that wire themselves up.",
-    body: "Pattern from avionics test conversations. Setting up a new HIL bench takes two weeks of LabVIEW and Python wiring per rig. With Oriv as the data layer, an AI agent understands the system, picks the right widgets, and generates the glue logic. Same morning, working test setup.",
+    capability: "Workflow generation",
+    title: "Test rigs, simulations, and tooling that come pre-wired.",
+    body: "The layer holds prior wiring choices, simulation setups, and integration patterns. An AI agent generates the next rig, the next model, the next glue script from what already worked — not from a blank file.",
     metric: "New HIL rig: 2 weeks → 1 morning",
-    forRole: "Test Engineering",
-    replaces: "Per-rig custom integration code",
+    industries: ["Avionics · test", "Robotics · prototyping", "Manufacturing · automation"],
   },
   {
-    industry: "Robotics R&D",
-    title: "Sensor selection without the spec-sheet rabbit hole.",
-    body: "Pattern from robotics conversations. Picking a new IMU or ToF sensor means cross-checking datasheets for drift, interface, and stock. With Oriv, the agent answers \"find me an IMU with tighter drift and the same I2C address\" in seconds. Cited against prior-qualified parts.",
-    metric: "Sensor swap: 2 days → 20 minutes",
-    forRole: "Robotics R&D",
-    replaces: "Cross-checking by hand",
-  },
-  {
-    industry: "Prototyping",
-    title: "Behavioral models that come with the part.",
-    body: "Pattern from robotics prototyping conversations. Building a calibrated simulation model from a datasheet runs 2 to 3 days per component. With Oriv as the data layer, an AI agent pulls conditions, signal characteristics, and qualification limits, and emits a ready model.",
-    metric: "Behavioral model: 3 days → 4 hours",
-    forRole: "Prototyping",
-    replaces: "Manual model calibration",
-  },
-  {
-    industry: "Component Engineering",
-    title: "Compare five datasheets without building a spreadsheet.",
-    body: "Pattern from hardware R&D conversations. Five MOSFET candidates, five datasheets, five different ways to spec RDS(on). Engineers build the comparison spreadsheet by hand. With Oriv, one query returns all five at the same operating point.",
+    capability: "Cross-vendor comparison",
+    title: "Five candidates at the same operating point, in one query.",
+    body: "Five datasheets specify the same parameter five different ways. The layer normalizes them — units, conditions, source — so comparison stops being a spreadsheet exercise and starts being a query.",
     metric: "Cross-vendor comparison: half a day → 30 seconds",
-    forRole: "Component Engineering",
-    replaces: "Manual cross-vendor spreadsheets",
+    industries: ["Component engineering", "Semiconductor · selection", "MedTech · sourcing"],
+  },
+  {
+    capability: "Onboarding compression",
+    title: "Senior judgment, available the day someone new joins.",
+    body: "The layer holds the reasoning a senior engineer carries in their head. The next person to take over inherits all of it — the prior decisions, the cited sources, the trade-offs already settled — ready to read on day one.",
+    metric: "Senior context handoff: weeks → days",
+    industries: ["Any team replacing a senior engineer", "Acquisitions", "Cross-site project transfers"],
+  },
+  {
+    capability: "Compliance audit",
+    title: "Every parameter cited back to source, ready for audit.",
+    body: "ISO 26262, FDA 21 CFR Part 11, DMSMS, ITAR — every regulated framework demands traceability. The layer keeps it as a first-class property of every record, not an afterthought.",
+    metric: "Audit prep: weeks → continuous",
+    industries: ["MedTech · FDA", "Automotive · ASIL", "A&D · ITAR / DMSMS"],
   },
 ];
 
@@ -67,15 +67,16 @@ export default function UseCases() {
         <Reveal>
           <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.4fr)] md:gap-16 md:items-end">
             <h2 className="headline-xl text-[var(--on-surface)]">
-              Built on Oriv.{" "}
+              What teams build on it.{" "}
               <span className="text-[var(--on-surface-variant)]">
-                What teams build with us.
+                Six capabilities. Every industry.
               </span>
             </h2>
             <p className="body-lg max-w-[620px] text-[var(--on-surface-variant)]">
-              Six patterns from discovery conversations. From 6 weeks to 1 day on
-              DMSMS investigations. From 200 candidates to 8 cited alternates in
-              90 seconds. Pick your domain.
+              The same layer powers different work across industries. Decision
+              recall, AI grounding, workflow generation, comparison, onboarding,
+              and audit &mdash; the capabilities are common; the industries are
+              the contexts they show up in.
             </p>
           </div>
         </Reveal>
@@ -83,12 +84,12 @@ export default function UseCases() {
         <Reveal delay={80}>
           <div
             role="tablist"
-            aria-label="Use cases by industry"
+            aria-label="Capabilities of the knowledge layer"
             className="mb-10 flex flex-wrap gap-2 border-b border-[var(--border-subtle)] pb-6"
           >
             {cases.map((cc, i) => (
               <button
-                key={cc.industry}
+                key={cc.capability}
                 role="tab"
                 aria-selected={i === active}
                 onClick={() => setActive(i)}
@@ -98,7 +99,7 @@ export default function UseCases() {
                     : "border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--on-surface-variant)] hover:border-[var(--on-surface-variant)] hover:text-[var(--on-surface)]"
                 }`}
               >
-                {cc.industry}
+                {cc.capability}
               </button>
             ))}
           </div>
@@ -109,7 +110,7 @@ export default function UseCases() {
           <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.3fr)] md:gap-16">
             <div>
               <p className="label-mono mb-4 text-[10.5px] tracking-[0.18em] text-[var(--on-surface)]">
-                {c.industry.toUpperCase()}
+                {c.capability.toUpperCase()}
               </p>
               <h3 className="headline-xl text-[var(--on-surface)]">{c.title}</h3>
             </div>
@@ -120,21 +121,28 @@ export default function UseCases() {
                 {c.metric}
               </div>
               <div className="flex flex-wrap gap-2 border-t border-[var(--border-subtle)] pt-5">
-                <span className="chip">For: {c.forRole}</span>
-                <span className="chip">Replaces: {c.replaces}</span>
+                <span className="label-mono mr-1 self-center text-[9.5px] tracking-[0.18em] text-[var(--outline)]">
+                  SHOWS UP IN
+                </span>
+                {c.industries.map((i) => (
+                  <span key={i} className="chip">
+                    {i}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
         </Reveal>
 
         <Reveal delay={180}>
-          <p className="mt-12 max-w-[680px] body-md text-[var(--on-surface-variant)]">
+          <p className="mt-12 max-w-[720px] body-md text-[var(--on-surface-variant)]">
             <span className="label-mono mr-2 text-[10px] tracking-[0.18em] text-[var(--outline)]">
               NOTE
             </span>
-            Oriv ships the data layer. The applications above are customer-built,
-            often with Cursor or Claude Code doing most of the typing. Names redacted
-            under NDA. Patterns are real.
+            Oriv ships the knowledge layer. The applications above are built by
+            the customers themselves, often with Cursor or Claude Code doing
+            most of the typing. Names are redacted under NDA, but the patterns
+            are real.
           </p>
         </Reveal>
       </div>

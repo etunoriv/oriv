@@ -3,14 +3,15 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import SubPageHero from "@/components/sub-page-hero";
 import CanonicalDemo from "@/components/canonical-demo";
-import DataLayer from "@/components/data-layer";
+import Wedge from "@/components/wedge";
+import Pivot from "@/components/pivot";
 import ProductPrimitives from "@/components/product-primitives";
 import PageCTA from "@/components/page-cta";
 
 export const metadata: Metadata = {
   title: "Platform · Oriv",
   description:
-    "Public datasheets and private SCDs in one canonical schema. Unit-normalized, condition-aware, per-field cited. Queryable from EDA, PLM, ERP, AI agents, and any internal app.",
+    "How the knowledge layer holds engineering data. Canonical schemas across vendors, public corpus plus the private tail, four parametric guarantees by contract. Queryable from EDA, PLM, ERP, AI agents, and any internal app.",
 };
 
 export default function ProductPage() {
@@ -27,10 +28,11 @@ export default function ProductPage() {
               </span>
             </>
           }
-          lede="Four vendors write the same supply-voltage spec four different ways. Oriv resolves them to one canonical field. Unit-validated. Condition-preserved. Source-cited. Your stack queries it through one interface."
+          lede="Four vendors write the same supply-voltage spec four different ways. Oriv resolves them to one canonical field — unit-validated, condition-preserved, source-cited. One interface for every tool in the stack."
         />
         <CanonicalDemo />
-        <DataLayer />
+        <Wedge />
+        <Pivot />
         <ProductPrimitives />
         <PageCTA
           title="Want to shape the schema with us?"

@@ -1,21 +1,23 @@
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
-import Problem from "@/components/problem";
-import Wedge from "@/components/wedge";
-import Pivot from "@/components/pivot";
+import WhatItCaptures from "@/components/what-it-captures";
+import WhereItSits from "@/components/where-it-sits";
 import UseCases from "@/components/use-cases";
+import InstitutionalCase from "@/components/institutional-case";
 import FinalCTA from "@/components/final-cta";
 import Footer from "@/components/footer";
 
 /**
- * Landing — content sourced from live oriv.io, rewritten in brand voice.
+ * Landing — category-positioned for the knowledge layer.
  *
- *   1. Hero        — the component data infrastructure pitch
- *   2. Problem     — same gap in every tool, AI agent vs Oriv side-by-side
- *   3. Wedge       — public corpus plus your long tail, in your tenant
- *   4. Pivot       — six properties of the data layer, accordion widget
- *   5. UseCases    — Built on Oriv: six patterns with metric callouts
- *   6. FinalCTA    — Q3 cohort ask, one button to email a co-founder
+ *   1. Hero               — what Oriv is
+ *   2. WhatItCaptures     — substance of the knowledge layer (3 record examples)
+ *   3. WhereItSits        — secondary-not-primary architecture (Oriv beneath your tools)
+ *   4. UseCases           — capability axis (decision recall, AI grounding, etc.)
+ *   5. InstitutionalCase  — knowledge as IP, for leadership / acquirers
+ *   6. FinalCTA           — design partner cohort, one button
+ *
+ * Problem, Wedge, and Pivot moved to /product (data-store proof depth).
  */
 export default function Home() {
   return (
@@ -23,10 +25,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Problem />
-        <Wedge />
-        <Pivot />
+        <WhatItCaptures />
+        <WhereItSits />
         <UseCases />
+        <InstitutionalCase />
         <FinalCTA />
       </main>
       <Footer />

@@ -33,16 +33,16 @@ const founders = [
 
 const values = [
   {
-    label: "Canonical over convenient",
-    body: "We could ship a fast search bar. We built a real parametric store. Extraction pipeline. Unit normalization. Condition tuples. Because shortcuts rot.",
+    label: "Knowledge belongs to whoever earned it",
+    body: "Decades of engineering decisions live in the heads of a few senior people, and the company paid for every one of them. The layer captures that work so it stays with the team that built it, instead of leaving when the person who carries it does.",
   },
   {
     label: "Cited, not guessed",
-    body: "Every field traces to its source page. In regulated engineering, an uncited parameter is a liability. We ship provenance as a primitive, not a feature.",
+    body: "Every decision traces to its source. In regulated engineering, an uncited choice is a liability. We ship provenance as a primitive, not a feature.",
   },
   {
-    label: "Your data stays yours",
-    body: "Private SCDs, MIL-PRF specs, and supplier quals live in your tenant only. Tenant isolation is a written guarantee, not a policy.",
+    label: "Your knowledge stays in your tenant",
+    body: "Everything the layer captures from your team lives in your tenant only. Tenant isolation is a written guarantee, not a policy, and what your team learns goes on informing your team rather than anyone else's.",
   },
 ];
 
@@ -59,9 +59,9 @@ export default function AboutContent() {
             transition={{ duration: 0.9, ease, delay: 0.08 }}
             className="headline-xl mb-8 max-w-[820px] text-[var(--on-surface)]"
           >
-            The gap between a PDF and a queryable record{" "}
+            A knowledge layer is what engineering has always needed.{" "}
             <span className="text-[var(--on-surface-variant)]">
-              costs hardware teams thousands of hours a year.
+              We&rsquo;re the team building it.
             </span>
           </motion.h1>
 
@@ -72,17 +72,16 @@ export default function AboutContent() {
             className="grid grid-cols-1 gap-6 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.2fr)] md:gap-16"
           >
             <p className="body-lg text-[var(--on-surface-variant)]">
-              We started Oriv because we kept seeing the same problem. Component
-              data lives in 40-page PDFs, gets duplicated across every tool that
-              needs it, and gets extracted from scratch every time. EDA re-extracts.
-              PLM updates on a different cadence. AI agents come last and guess.
+              Decades of engineering decisions, trade-offs, and reasoning live
+              in the heads of a few senior people on every team. The day those
+              people leave, the knowledge goes with them. The next project
+              starts from zero.
             </p>
             <p className="body-lg text-[var(--on-surface-variant)]">
-              The public-corpus vendors handle the commodity parts well. Twenty
-              years of indexed catalogs. But the 40% of every regulated BOM that
-              lives in your SCDs, MIL-PRF specs, and supplier quals? Nobody ingests
-              that. So we built Oriv to ship both layers behind one canonical schema
-              and one query interface.
+              Oriv is the layer that holds it. Captured from the engineers who
+              made the calls. Cited back to source. Queryable from every tool
+              already in the stack. Built so the work compounds across projects
+              instead of resetting.
             </p>
           </motion.div>
         </div>
@@ -145,7 +144,7 @@ export default function AboutContent() {
               <h2 className="headline-xl text-[var(--on-surface)]">
                 What we believe{" "}
                 <span className="text-[var(--on-surface-variant)]">
-                  about data layers.
+                  about knowledge.
                 </span>
               </h2>
               <p className="body-lg max-w-[600px] text-[var(--on-surface-variant)]">

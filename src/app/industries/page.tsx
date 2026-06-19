@@ -9,7 +9,7 @@ import PageCTA from "@/components/page-cta";
 export const metadata: Metadata = {
   title: "Industries · Oriv",
   description:
-    "How aerospace, automotive, MedTech, robotics, and semiconductor teams use Oriv as the data layer beneath their internal tools. Integration grid: EDA, PLM, ERP, AI, custom.",
+    "Where the knowledge layer applies: aerospace, automotive, MedTech, robotics, semiconductor, energy, and manufacturing. Sits beneath the EDA, PLM, ERP, AI, and custom tools engineering teams already run.",
 };
 
 export default function IndustriesPage() {
@@ -20,13 +20,13 @@ export default function IndustriesPage() {
         <SubPageHero
           title={
             <>
-              The data layer is ours.{" "}
+              The knowledge layer is ours.{" "}
               <span className="text-[var(--on-surface-variant)]">
-                The application is yours.
+                The applications are yours.
               </span>
             </>
           }
-          lede="Engineering teams build their own tools on top of Oriv. Or wire it straight into the stack they already run. Pick a domain to see the pattern we hear most."
+          lede="Teams build their own tools on top of Oriv. Or wire it straight into the stack they already run. Pick a domain to see the pattern we hear most."
         />
         <IntegrationGrid />
         <UseCases />

@@ -21,15 +21,15 @@ export default function Problem() {
         <Reveal>
           <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.4fr)] md:gap-16 md:items-end">
             <h2 className="headline-xl text-[var(--on-surface)]">
-              The same gap shows up in every tool.{" "}
+              Same prompt.{" "}
               <span className="text-[var(--on-surface-variant)]">
-                Most painfully in your AI ones.
+                One reads engineering. One reads text.
               </span>
             </h2>
             <p className="body-lg max-w-[620px] text-[var(--on-surface-variant)]">
-              Every tool in your stack carries its own version of the same component
-              data. AI agents come last and guess. The clearest example sits right
-              below.
+              Below: the same question sent to a frontier LLM and to Oriv. One
+              treats it as language. The other treats it as engineering &mdash;
+              with the conditions, citations, and reasoning behind the answer.
             </p>
           </div>
         </Reveal>
