@@ -27,9 +27,9 @@ const geist = Geist({
 });
 
 const SITE_URL = "https://oriv.io";
-const TITLE = "Oriv. The parametric data layer for hardware engineering.";
+const TITLE = "Oriv. The knowledge layer for engineering teams.";
 const DESCRIPTION =
-  "Oriv turns public datasheets and your private specs into one canonical schema. Queryable from EDA, PLM, ERP, and any AI agent your engineers run.";
+  "Oriv captures the reasoning behind every engineering decision your team has made, with each one cited back to its source and held in your tenant. Queryable from any tool you already use.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
