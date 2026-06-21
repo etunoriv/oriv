@@ -59,7 +59,7 @@ export default function AboutContent() {
             transition={{ duration: 0.9, ease, delay: 0.08 }}
             className="headline-xl mb-8 max-w-[820px] text-[var(--on-surface)]"
           >
-            A knowledge layer is what engineering has always needed.{" "}
+            A knowledge layer is what hardware engineering has always needed.{" "}
             <span className="text-[var(--on-surface-variant)]">
               We&rsquo;re the team building it.
             </span>
@@ -79,9 +79,9 @@ export default function AboutContent() {
             </p>
             <p className="body-lg text-[var(--on-surface-variant)]">
               Oriv is the layer that holds it. Captured from the engineers who
-              made the calls. Cited back to source. Queryable from every tool
-              already in the stack. Built so the work compounds across projects
-              instead of resetting.
+              made the calls. Cited back to source. Available to every tool
+              already in the stack. The work compounds across projects instead
+              of resetting.
             </p>
           </motion.div>
         </div>

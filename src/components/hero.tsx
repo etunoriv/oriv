@@ -39,7 +39,7 @@ export default function Hero() {
           >
             The knowledge layer{" "}
             <span className="text-[var(--on-surface-variant)]">
-              for engineering teams.
+              for hardware engineering teams.
             </span>
           </motion.h1>
         </div>
@@ -53,9 +53,9 @@ export default function Hero() {
           className="mt-8 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between md:gap-12"
         >
           <p className="max-w-[600px] body-lg text-[var(--on-surface-variant)]">
-            Captures the reasoning behind every engineering decision your team
-            has made, with each one cited back to its source and held in your
-            tenant. Queryable from any tool you already use.
+            Oriv captures every decision an engineering team makes across
+            selection, simulation, prototyping, and live instruments. Every
+            record cites its source and stays inside your tenant.
           </p>
 
           <button

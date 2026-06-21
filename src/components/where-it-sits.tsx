@@ -25,7 +25,7 @@ const layers = [
   {
     num: "03",
     title: "The knowledge layer",
-    body: "Decisions, trade-offs, reasoning, citations, reuse history — all captured from the engineers who made the calls and held in your tenant. The layer stays secondary by design.",
+    body: "Decisions, trade-offs, reasoning, citations, reuse history. All captured from the engineers who made the calls and held in your tenant. The layer stays secondary by design.",
     tools: ["Decisions", "Reasoning", "Trade-offs", "Citations", "Reuse map"],
     accent: true,
   },
@@ -49,9 +49,8 @@ export default function WhereItSits() {
             <p className="body-lg max-w-[620px] text-[var(--on-surface-variant)]">
               Oriv doesn&rsquo;t replace the EDA, PLM, simulation, or AI tools
               your team already trusts. It sits underneath them and holds the
-              knowledge they don&rsquo;t &mdash; the reasoning, the citations,
-              the prior decisions &mdash; ready to feed back whichever tool
-              asks for it.
+              knowledge they don&rsquo;t. Reasoning, citations, prior
+              decisions. Available to whichever tool asks for it.
             </p>
           </div>
         </Reveal>

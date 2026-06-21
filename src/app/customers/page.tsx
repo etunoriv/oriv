@@ -6,7 +6,7 @@ import CustomersContent from "@/components/customers-content";
 export const metadata: Metadata = {
   title: "Customers · Oriv",
   description:
-    "Oriv is in the design-partner phase. Three engineering teams shaping the knowledge layer for the work that comes after. Names land here as each partner is ready.",
+    "Oriv is in the design-partner phase. Three hardware engineering teams shaping the knowledge layer for the work that comes after. Names land here as each partner is ready.",
 };
 
 export default function CustomersPage() {

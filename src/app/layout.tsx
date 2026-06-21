@@ -27,9 +27,9 @@ const geist = Geist({
 });
 
 const SITE_URL = "https://oriv.io";
-const TITLE = "Oriv. The knowledge layer for engineering teams.";
+const TITLE = "Oriv. The knowledge layer for hardware engineering teams.";
 const DESCRIPTION =
-  "Oriv captures the reasoning behind every engineering decision your team has made, with each one cited back to its source and held in your tenant. Queryable from any tool you already use.";
+  "Oriv captures every decision a hardware engineering team makes across selection, simulation, prototyping, and live instruments. Every record cites its source and stays inside your tenant.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

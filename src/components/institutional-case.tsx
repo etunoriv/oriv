@@ -48,10 +48,10 @@ export default function InstitutionalCase() {
               </span>
             </h2>
             <p className="body-lg max-w-[620px] text-[var(--on-surface-variant)]">
-              Patents cover the artifact and trade secrets cover the formula,
-              but the decisions and reasoning that took your senior engineers
-              years to accumulate &mdash; the most valuable engineering IP a
-              company actually owns &mdash; have had nowhere to live until now.
+              Patents cover the artifact. Trade secrets cover the formula. The
+              decisions and reasoning that took years for senior engineers to
+              accumulate, which is the most valuable engineering IP a company
+              actually owns, have had nowhere to live until now.
             </p>
           </div>
         </Reveal>

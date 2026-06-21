@@ -9,7 +9,6 @@ import { useBooker } from "@/components/booker";
 
 const links = [
   { label: "Product", href: "/product" },
-  { label: "Industries", href: "/industries" },
   { label: "Customers", href: "/customers" },
   { label: "Trust", href: "/trust" },
   { label: "About", href: "/about" },

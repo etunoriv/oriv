@@ -13,7 +13,6 @@ const groups = [
     heading: "Product",
     items: [
       { label: "Platform", href: "/product" },
-      { label: "Industries", href: "/industries" },
       { label: "Customers", href: "/customers" },
       { label: "Trust & compliance", href: "/trust" },
     ],

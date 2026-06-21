@@ -3,15 +3,14 @@
 import { Reveal, Stagger, Item } from "@/lib/motion";
 
 /**
- * What It Captures — the substance of the knowledge layer. Three example
- * records demonstrating the range: a component decision, a test/validation
- * choice, an architecture trade-off. Each shows what gets captured beyond
- * what a parametric data store would hold.
+ * What It Captures — four example records spanning the four pillars:
+ * selection, simulation, prototyping, instruments. Each shows a real decision
+ * or observation an engineering team made, with the why and the source.
  */
 
 type Record = {
   label: string;
-  kind: string;
+  pillar: string;
   decision: string;
   why: string;
   source: string;
@@ -21,27 +20,35 @@ type Record = {
 const records: Record[] = [
   {
     label: "01",
-    kind: "Component decision",
+    pillar: "Selection",
     decision: "20pF capacitor on V+ pin, not 47pF.",
-    why: "Suppresses 60 MHz oscillation observed at Tj > 85°C in bench testing. Higher value damped the signal too aggressively.",
-    source: "SCD-04, p.3, tbl 2.4 · Bench run_8f2a",
+    why: "Suppresses 60 MHz oscillation observed at Tj above 85°C in bench testing. Higher values damped the signal too aggressively.",
+    source: "Design rev C, tbl 2.4 · Bench run_8f2a",
     reuse: "7 projects · 11 designs",
   },
   {
     label: "02",
-    kind: "Test bench choice",
-    decision: "HIL rig wired through CAN-FD, not Ethernet.",
-    why: "Production target uses CAN-FD for sensor bus. Ethernet HIL passed unit tests but missed timing edge cases in 3 prior projects.",
+    pillar: "Simulation",
+    decision: "SPICE model derated 12% from vendor typical.",
+    why: "Bench validation found 0.85 V/µs slew rate at Tj above 100°C, against vendor typical of 1.2. Model now matches measured behavior across temperature.",
+    source: "Sim run_3f1c · Bench corr. 94%",
+    reuse: "Used by 4 sims · 2 projects",
+  },
+  {
+    label: "03",
+    pillar: "Prototype",
+    decision: "HIL bench wired through CAN-FD, not Ethernet.",
+    why: "Production target uses CAN-FD for the sensor bus. Ethernet HIL passed unit tests but missed timing edge cases in 3 prior projects.",
     source: "Lessons-learned · proj_Helios-2",
     reuse: "4 projects · 6 rigs",
   },
   {
-    label: "03",
-    kind: "Architecture trade-off",
-    decision: "Single MCU with watchdog, not dual-MCU redundant.",
-    why: "ASIL-B target. Dual-MCU exceeded BOM cost ceiling. Watchdog + lockstep core meets diagnostic coverage requirement.",
-    source: "Safety case §4.2 · ISO 26262 review",
-    reuse: "2 projects · 3 designs",
+    label: "04",
+    pillar: "Instruments",
+    decision: "Field Vos drift threshold tightened to 0.5 mV.",
+    why: "Telemetry from 47 deployed units showed 0.4 mV drift at 180 days. Earlier 1 mV threshold would have flagged 12 false positives.",
+    source: "Field run_b2e9 · 47 units, 180 days",
+    reuse: "2 projects · 1 active fleet",
   },
 ];
 
@@ -55,25 +62,24 @@ export default function WhatItCaptures() {
         <Reveal>
           <div className="mb-14 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.4fr)] md:gap-16 md:items-end">
             <h2 className="headline-xl text-[var(--on-surface)]">
-              What the layer holds.{" "}
+              Four pillars. One layer.{" "}
               <span className="text-[var(--on-surface-variant)]">
-                The work that never makes it into the docs.
+                Captured the same way.
               </span>
             </h2>
             <p className="body-lg max-w-[620px] text-[var(--on-surface-variant)]">
-              Senior engineers carry the weight of every decision their team
-              has made &mdash; why this component over that, what broke last
-              time, what conditions a design held under. The layer captures
-              that work as records, with each one cited back to its source and
-              ready for whoever needs it next.
+              Engineering teams make decisions across selection, simulation,
+              prototyping, and live instruments. Oriv captures each one as a
+              record, attaches the reasoning, and cites the source. Four
+              examples below from the work teams already do.
             </p>
           </div>
         </Reveal>
 
-        {/* Three knowledge records side-by-side */}
+        {/* Four knowledge records side-by-side */}
         <Stagger
-          className="grid grid-cols-1 gap-5 md:grid-cols-3"
-          step={0.1}
+          className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"
+          step={0.08}
           delayChildren={0.05}
         >
           {records.map((r) => (
@@ -86,10 +92,10 @@ export default function WhatItCaptures() {
                       {r.label}
                     </span>
                     <span className="label-mono text-[9.5px] tracking-[0.18em] text-[var(--oriv-yellow)]">
-                      {r.kind.toUpperCase()}
+                      {r.pillar.toUpperCase()}
                     </span>
                   </div>
-                  <p className="text-[15px] font-semibold tracking-[-0.01em] text-[var(--on-surface)] md:text-[15.5px]">
+                  <p className="text-[14.5px] font-semibold tracking-[-0.01em] text-[var(--on-surface)] md:text-[15px]">
                     {r.decision}
                   </p>
                 </div>
@@ -130,9 +136,9 @@ export default function WhatItCaptures() {
 
         <Reveal delay={220}>
           <p className="mt-10 max-w-[720px] body-md text-[var(--on-surface-variant)]">
-            Three different kinds of decisions, all held in the same schema and
-            cited back to source. Ready the next time an engineer on the team
-            runs into a similar fork.
+            Selection, simulation, prototype, instruments. Four kinds of work,
+            captured the same way and stored in one schema. Cited back to
+            source. Ready when an engineer hits a similar fork.
           </p>
         </Reveal>
       </div>

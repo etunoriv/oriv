@@ -8,7 +8,6 @@ const handler = createLlmsTxtHandler({
       links: [
         { title: "Home", href: "/" },
         { title: "Product", href: "/product" },
-        { title: "Industries", href: "/industries" },
         { title: "Customers", href: "/customers" },
         { title: "Trust & compliance", href: "/trust" },
         { title: "About", href: "/about" },

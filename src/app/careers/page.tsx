@@ -6,7 +6,7 @@ import CareersContent from "@/components/careers-content";
 export const metadata: Metadata = {
   title: "Careers · Oriv",
   description:
-    "We're hiring engineers who care about capturing how engineering teams actually think. Small team, hard problem, regulated-industry customers.",
+    "We're hiring engineers who care about capturing how hardware engineering teams actually think. Small team, hard problem, regulated customers.",
 };
 
 export default function CareersPage() {
