@@ -60,9 +60,9 @@ export default function ProductPrimitives() {
               <span className="text-[var(--on-surface-variant)]">One canonical store.</span>
             </h2>
             <p className="body-lg max-w-[640px] text-[var(--on-surface-variant)]">
-              A real parametric store has guaranteed contracts at every layer. From
-              extraction through storage through query. Each primitive below is
-              a written guarantee, not a feature flag.
+              A real parametric store has guaranteed contracts at every layer.
+              Each primitive below is written into the data model itself,
+              held the same way from extraction through storage through query.
             </p>
           </div>
         </Reveal>

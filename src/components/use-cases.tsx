@@ -36,7 +36,7 @@ const cases = [
     capability: "Live monitoring",
     pillar: "Instruments",
     title: "Deployed units, compared back to design intent.",
-    body: "Field telemetry streams into the same record that held the design decision. Drift, anomalies, and failure modes show up against the original spec, not as a separate dataset.",
+    body: "Field telemetry streams into the same record that held the design decision. Drift, anomalies, and failure modes show up against the original spec inside one shared view.",
     metric: "Field telemetry, compared continuously",
   },
   {

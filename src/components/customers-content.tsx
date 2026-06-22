@@ -90,7 +90,7 @@ export default function CustomersContent() {
             <p className="body-lg text-[var(--on-surface-variant)]">
               Logos and named case studies land on this page when each partner is
               cleared to be public. Until then, the profiles below describe the
-              engineering context, not the company.
+              engineering context the partnership covers.
             </p>
           </motion.div>
         </div>
@@ -168,7 +168,7 @@ export default function CustomersContent() {
                 </span>
               </h2>
               <p className="body-lg max-w-[600px] text-[var(--on-surface-variant)]">
-                Four guarantees we make to every design partner. Written, not assumed.
+                Four guarantees we make to every design partner, each one written into the agreement.
               </p>
             </div>
           </Reveal>

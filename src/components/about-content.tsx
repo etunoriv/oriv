@@ -37,12 +37,12 @@ const values = [
     body: "Decades of engineering decisions live in the heads of a few senior people, and the company paid for every one of them. The layer captures that work so it stays with the team that built it, instead of leaving when the person who carries it does.",
   },
   {
-    label: "Cited, not guessed",
-    body: "Every decision traces to its source. In regulated engineering, an uncited choice is a liability. We ship provenance as a primitive, not a feature.",
+    label: "Citation is the primitive",
+    body: "Every decision traces to its source. In regulated engineering, an uncited choice is a liability, so the layer ships provenance as a first-class property of every record.",
   },
   {
     label: "Your knowledge stays in your tenant",
-    body: "Everything the layer captures from your team lives in your tenant only. Tenant isolation is a written guarantee, not a policy, and what your team learns goes on informing your team rather than anyone else's.",
+    body: "Everything the layer captures from your team lives in your tenant only. Tenant isolation is a written guarantee, and what your team learns goes on informing your team for as long as you want it to.",
   },
 ];
 
