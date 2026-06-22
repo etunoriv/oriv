@@ -53,9 +53,9 @@ export default function Hero() {
           className="mt-8 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between md:gap-12"
         >
           <p className="max-w-[600px] body-lg text-[var(--on-surface-variant)]">
-            Oriv captures every decision an engineering team makes across
-            selection, simulation, prototyping, and live instruments. Every
-            record cites its source and stays inside your tenant.
+            Oriv captures the reasoning behind every decision a hardware
+            engineering team makes. Each one cites its source, lives in your
+            tenant, and is available to any tool already in the stack.
           </p>
 
           <button

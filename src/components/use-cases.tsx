@@ -13,42 +13,36 @@ import { Reveal } from "@/lib/motion";
 const cases = [
   {
     capability: "Component selection",
-    pillar: "Selection",
     title: "Pick the right component from a global knowledge base.",
     body: "Oriv reads manufacturer datasheets and qualification records into one schema. Engineers narrow 200 candidates to a cited shortlist in minutes, with every parameter traceable to source.",
     metric: "200 candidates to 8 cited alternates in 90 seconds",
   },
   {
-    capability: "Physics simulation",
-    pillar: "Simulation",
-    title: "Simulate behavior before ordering hardware.",
+    capability: "Pre-hardware simulation",
+    title: "Simulate behavior before ordering parts.",
     body: "Physics models grounded in vendor data and bench history. Oriv generates a calibrated SPICE model from the captured record, with conditions preserved and prior validation runs cited.",
     metric: "Behavioral model: 3 days to 4 hours",
   },
   {
     capability: "Test bench setup",
-    pillar: "Prototype",
-    title: "Test rigs wired from prior projects, not from scratch.",
+    title: "Rigs wired from prior projects.",
     body: "Oriv holds the wiring choices, integration patterns, and HIL configurations from past work. An agent generates the next rig from what already converged, with the failure history attached.",
     metric: "New HIL rig: 2 weeks to 1 morning",
   },
   {
     capability: "Live monitoring",
-    pillar: "Instruments",
     title: "Deployed units, compared back to design intent.",
     body: "Field telemetry streams into the same record that held the design decision. Drift, anomalies, and failure modes show up against the original spec inside one shared view.",
     metric: "Field telemetry, compared continuously",
   },
   {
     capability: "Onboarding compression",
-    pillar: "Cross-pillar",
     title: "Senior judgment, available the day someone new joins.",
     body: "The layer holds the reasoning a senior engineer carries in their head. The next person to take over inherits the prior decisions, the cited sources, and the trade-offs already settled.",
     metric: "Senior context handoff: weeks to days",
   },
   {
     capability: "Compliance audit",
-    pillar: "Cross-pillar",
     title: "Every parameter cited back to source, ready for audit.",
     body: "Every regulated review demands traceability. Oriv keeps it as a first-class property of every record, with source citations attached the moment the decision is captured.",
     metric: "Audit prep: weeks to continuous",
@@ -70,13 +64,13 @@ export default function UseCases() {
             <h2 className="headline-xl text-[var(--on-surface)]">
               What teams build on it.{" "}
               <span className="text-[var(--on-surface-variant)]">
-                Across the lifecycle.
+                Six patterns from real work.
               </span>
             </h2>
             <p className="body-lg max-w-[620px] text-[var(--on-surface-variant)]">
-              Six capabilities, one for each pillar plus the cross-pillar work
-              that runs through all of them. The same layer powers each of
-              them, from a global knowledge base shared across every record.
+              Six capabilities engineering teams build on Oriv. Each one
+              draws from the same shared record set, and each one slots
+              into whatever workflow the team already runs.
             </p>
           </div>
         </Reveal>
@@ -109,9 +103,6 @@ export default function UseCases() {
         <Reveal delay={140} key={active}>
           <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.3fr)] md:gap-16">
             <div>
-              <p className="label-mono mb-4 text-[10.5px] tracking-[0.18em] text-[var(--on-surface)]">
-                {c.pillar.toUpperCase()}
-              </p>
               <h3 className="headline-xl text-[var(--on-surface)]">{c.title}</h3>
             </div>
             <div>

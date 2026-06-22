@@ -3,14 +3,16 @@
 import { Reveal, Stagger, Item } from "@/lib/motion";
 
 /**
- * What It Captures — four example records spanning the four pillars:
- * selection, simulation, prototyping, instruments. Each shows a real decision
- * or observation an engineering team made, with the why and the source.
+ * What It Captures — three example records demonstrating the kinds of
+ * engineering knowledge the layer holds. Each shows a real decision a team
+ * has made, the reasoning behind it, the cited source, and where it has
+ * been reused. No pillar tags; the layer fits whatever workflow the team
+ * already has.
  */
 
 type Record = {
   label: string;
-  pillar: string;
+  kind: string;
   decision: string;
   why: string;
   source: string;
@@ -20,7 +22,7 @@ type Record = {
 const records: Record[] = [
   {
     label: "01",
-    pillar: "Selection",
+    kind: "Component decision",
     decision: "20pF capacitor on V+ pin, not 47pF.",
     why: "Suppresses 60 MHz oscillation observed at Tj above 85°C in bench testing. Higher values damped the signal too aggressively.",
     source: "Design rev C, tbl 2.4 · Bench run_8f2a",
@@ -28,25 +30,17 @@ const records: Record[] = [
   },
   {
     label: "02",
-    pillar: "Simulation",
-    decision: "SPICE model derated 12% from vendor typical.",
-    why: "Bench validation found 0.85 V/µs slew rate at Tj above 100°C, against vendor typical of 1.2. Model now matches measured behavior across temperature.",
-    source: "Sim run_3f1c · Bench corr. 94%",
-    reuse: "Used by 4 sims · 2 projects",
-  },
-  {
-    label: "03",
-    pillar: "Prototype",
-    decision: "HIL bench wired through CAN-FD, not Ethernet.",
-    why: "Production target uses CAN-FD for the sensor bus. Ethernet HIL passed unit tests but missed timing edge cases in 3 prior projects.",
+    kind: "Architecture trade-off",
+    decision: "HIL rig wired through CAN-FD, not Ethernet.",
+    why: "Production target uses CAN-FD for the sensor bus. Ethernet HIL passed unit tests but missed timing edge cases in three prior projects.",
     source: "Lessons-learned · proj_Helios-2",
     reuse: "4 projects · 6 rigs",
   },
   {
-    label: "04",
-    pillar: "Instruments",
-    decision: "Field Vos drift threshold tightened to 0.5 mV.",
-    why: "Telemetry from 47 deployed units showed 0.4 mV drift at 180 days. Earlier 1 mV threshold would have flagged 12 false positives.",
+    label: "03",
+    kind: "Field observation",
+    decision: "Vos drift threshold tightened to 0.5 mV.",
+    why: "Field telemetry from 47 deployed units showed 0.4 mV drift at 180 days. The earlier 1 mV threshold would have flagged 12 false positives.",
     source: "Field run_b2e9 · 47 units, 180 days",
     reuse: "2 projects · 1 active fleet",
   },
@@ -62,24 +56,25 @@ export default function WhatItCaptures() {
         <Reveal>
           <div className="mb-14 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.4fr)] md:gap-16 md:items-end">
             <h2 className="headline-xl text-[var(--on-surface)]">
-              Four pillars. One layer.{" "}
+              What the layer holds.{" "}
               <span className="text-[var(--on-surface-variant)]">
-                Captured the same way.
+                The work that never makes it into the docs.
               </span>
             </h2>
             <p className="body-lg max-w-[620px] text-[var(--on-surface-variant)]">
-              Engineering teams make decisions across selection, simulation,
-              prototyping, and live instruments. Oriv captures each one as a
-              record, attaches the reasoning, and cites the source. Four
-              examples below from the work teams already do.
+              Engineering teams make hundreds of decisions a project. Most
+              of them never make it into the docs. Oriv captures the
+              reasoning, the trade-offs, and the source citations for each
+              one, so the layer holds what would otherwise live in one
+              senior engineer&rsquo;s head.
             </p>
           </div>
         </Reveal>
 
-        {/* Four knowledge records side-by-side */}
+        {/* Three knowledge records side-by-side */}
         <Stagger
-          className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"
-          step={0.08}
+          className="grid grid-cols-1 gap-5 md:grid-cols-3"
+          step={0.1}
           delayChildren={0.05}
         >
           {records.map((r) => (
@@ -92,10 +87,10 @@ export default function WhatItCaptures() {
                       {r.label}
                     </span>
                     <span className="label-mono text-[9.5px] tracking-[0.18em] text-[var(--oriv-yellow)]">
-                      {r.pillar.toUpperCase()}
+                      {r.kind.toUpperCase()}
                     </span>
                   </div>
-                  <p className="text-[14.5px] font-semibold tracking-[-0.01em] text-[var(--on-surface)] md:text-[15px]">
+                  <p className="text-[15px] font-semibold tracking-[-0.01em] text-[var(--on-surface)] md:text-[15.5px]">
                     {r.decision}
                   </p>
                 </div>
@@ -136,9 +131,10 @@ export default function WhatItCaptures() {
 
         <Reveal delay={220}>
           <p className="mt-10 max-w-[720px] body-md text-[var(--on-surface-variant)]">
-            Selection, simulation, prototype, instruments. Four kinds of work,
-            captured the same way and stored in one schema. Cited back to
-            source. Ready when an engineer hits a similar fork.
+            Three different kinds of decisions, all held in the same schema
+            and cited back to source. Ready the next time an engineer on the
+            team runs into a similar fork in the work they&rsquo;re already
+            doing.
           </p>
         </Reveal>
       </div>
